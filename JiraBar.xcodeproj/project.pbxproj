@@ -1,0 +1,450 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		769F4E4F2775640900594911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E4E2775640900594911 /* AppDelegate.swift */; };
+		769F4E512775640900594911 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E502775640900594911 /* ViewController.swift */; };
+		769F4E532775640A00594911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E522775640A00594911 /* Assets.xcassets */; };
+		769F4E562775640A00594911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E542775640A00594911 /* Main.storyboard */; };
+		769F4E5F277567E200594911 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 769F4E5E277567E200594911 /* Alamofire */; };
+		769F4E62277569E700594911 /* JiraClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E61277569E700594911 /* JiraClient.swift */; };
+		769F4E652776430F00594911 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 769F4E642776430F00594911 /* Defaults */; };
+		769F4E682776442200594911 /* JiraDtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E672776442200594911 /* JiraDtos.swift */; };
+		769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E6A27764C3000594911 /* NSMutableAttributedString.swift */; };
+		769F4E6D27764C6900594911 /* NSColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E6C27764C6900594911 /* NSColorExtensions.swift */; };
+		769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E6E27764CF300594911 /* NSImageExtensions.swift */; };
+		769F4E712776AE4700594911 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E702776AE4700594911 /* StringExtensions.swift */; };
+		769F4E75277795E700594911 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E74277795E700594911 /* AboutView.swift */; };
+		769F4E772777993400594911 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E762777993400594911 /* PreferencesView.swift */; };
+		769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E7827779E8000594911 /* DefaultsExtensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		769F4E4B2775640900594911 /* JiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		769F4E4E2775640900594911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		769F4E502775640900594911 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		769F4E522775640A00594911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		769F4E552775640A00594911 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		769F4E572775640A00594911 /* JiraBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiraBar.entitlements; sourceTree = "<group>"; };
+		769F4E61277569E700594911 /* JiraClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraClient.swift; sourceTree = "<group>"; };
+		769F4E672776442200594911 /* JiraDtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraDtos.swift; sourceTree = "<group>"; };
+		769F4E6A27764C3000594911 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		769F4E6C27764C6900594911 /* NSColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColorExtensions.swift; sourceTree = "<group>"; };
+		769F4E6E27764CF300594911 /* NSImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageExtensions.swift; sourceTree = "<group>"; };
+		769F4E702776AE4700594911 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		769F4E74277795E700594911 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		769F4E762777993400594911 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		769F4E7827779E8000594911 /* DefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsExtensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		769F4E482775640900594911 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769F4E652776430F00594911 /* Defaults in Frameworks */,
+				769F4E5F277567E200594911 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		769F4E422775640900594911 = {
+			isa = PBXGroup;
+			children = (
+				769F4E4D2775640900594911 /* JiraBar */,
+				769F4E4C2775640900594911 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		769F4E4C2775640900594911 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				769F4E4B2775640900594911 /* JiraBar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		769F4E4D2775640900594911 /* JiraBar */ = {
+			isa = PBXGroup;
+			children = (
+				769F4E73277795D700594911 /* Views */,
+				769F4E6927764BFE00594911 /* Extensions */,
+				769F4E60277569D900594911 /* Jira */,
+				769F4E4E2775640900594911 /* AppDelegate.swift */,
+				769F4E502775640900594911 /* ViewController.swift */,
+				769F4E522775640A00594911 /* Assets.xcassets */,
+				769F4E542775640A00594911 /* Main.storyboard */,
+				769F4E572775640A00594911 /* JiraBar.entitlements */,
+			);
+			path = JiraBar;
+			sourceTree = "<group>";
+		};
+		769F4E60277569D900594911 /* Jira */ = {
+			isa = PBXGroup;
+			children = (
+				769F4E61277569E700594911 /* JiraClient.swift */,
+				769F4E672776442200594911 /* JiraDtos.swift */,
+			);
+			path = Jira;
+			sourceTree = "<group>";
+		};
+		769F4E6927764BFE00594911 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				769F4E6A27764C3000594911 /* NSMutableAttributedString.swift */,
+				769F4E6C27764C6900594911 /* NSColorExtensions.swift */,
+				769F4E6E27764CF300594911 /* NSImageExtensions.swift */,
+				769F4E702776AE4700594911 /* StringExtensions.swift */,
+				769F4E7827779E8000594911 /* DefaultsExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		769F4E73277795D700594911 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				769F4E74277795E700594911 /* AboutView.swift */,
+				769F4E762777993400594911 /* PreferencesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		769F4E4A2775640900594911 /* JiraBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 769F4E5A2775640A00594911 /* Build configuration list for PBXNativeTarget "JiraBar" */;
+			buildPhases = (
+				769F4E472775640900594911 /* Sources */,
+				769F4E482775640900594911 /* Frameworks */,
+				769F4E492775640900594911 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JiraBar;
+			packageProductDependencies = (
+				769F4E5E277567E200594911 /* Alamofire */,
+				769F4E642776430F00594911 /* Defaults */,
+			);
+			productName = JiraBar;
+			productReference = 769F4E4B2775640900594911 /* JiraBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		769F4E432775640900594911 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					769F4E4A2775640900594911 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 769F4E462775640900594911 /* Build configuration list for PBXProject "JiraBar" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 769F4E422775640900594911;
+			packageReferences = (
+				769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				769F4E632776430F00594911 /* XCRemoteSwiftPackageReference "Defaults" */,
+			);
+			productRefGroup = 769F4E4C2775640900594911 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				769F4E4A2775640900594911 /* JiraBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		769F4E492775640900594911 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769F4E532775640A00594911 /* Assets.xcassets in Resources */,
+				769F4E562775640A00594911 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		769F4E472775640900594911 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769F4E712776AE4700594911 /* StringExtensions.swift in Sources */,
+				769F4E512775640900594911 /* ViewController.swift in Sources */,
+				769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */,
+				769F4E682776442200594911 /* JiraDtos.swift in Sources */,
+				769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */,
+				769F4E75277795E700594911 /* AboutView.swift in Sources */,
+				769F4E772777993400594911 /* PreferencesView.swift in Sources */,
+				769F4E6D27764C6900594911 /* NSColorExtensions.swift in Sources */,
+				769F4E4F2775640900594911 /* AppDelegate.swift in Sources */,
+				769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */,
+				769F4E62277569E700594911 /* JiraClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		769F4E542775640A00594911 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				769F4E552775640A00594911 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		769F4E582775640A00594911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		769F4E592775640A00594911 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		769F4E5B2775640A00594911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JiraBar/JiraBar.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV3HUS49VJ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pavelmakhov.JiraBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		769F4E5C2775640A00594911 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JiraBar/JiraBar.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV3HUS49VJ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pavelmakhov.JiraBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		769F4E462775640900594911 /* Build configuration list for PBXProject "JiraBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				769F4E582775640A00594911 /* Debug */,
+				769F4E592775640A00594911 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		769F4E5A2775640A00594911 /* Build configuration list for PBXNativeTarget "JiraBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				769F4E5B2775640A00594911 /* Debug */,
+				769F4E5C2775640A00594911 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		769F4E632776430F00594911 /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		769F4E5E277567E200594911 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		769F4E642776430F00594911 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 769F4E632776430F00594911 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 769F4E432775640900594911 /* Project object */;
+}
