@@ -26,19 +26,23 @@ struct Fields: Codable {
     var summary: String
     var status: IssueStatus
     var issuetype: IssueType
+    var project: Project
     
     enum CodingKeys: String, CodingKey {
         case summary
         case status
         case issuetype
+        case project
     }
 }
 
 struct IssueStatus: Codable {
     var name: String
+    var iconUrl: URL?
     
     enum CodingKeys: String, CodingKey {
         case name
+        case iconUrl
     }
 }
 
@@ -46,6 +50,14 @@ struct IssueType: Codable {
     var name: String
     
     enum CodingKeys: String, CodingKey {
+        case name
+    }
+}
+
+struct Project: Codable {
+    var name: String
+    
+    enum CodingKeus: String, CodingKey {
         case name
     }
 }

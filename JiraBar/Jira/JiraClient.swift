@@ -15,7 +15,7 @@ public class JiraClient {
         let url = "\(jiraHost)/rest/api/2/search"
         let parameters = [
             "jql": jql,
-            "fields":"id,assignee,summary,status,issuetype",
+            "fields":"id,assignee,summary,status,issuetype,project",
             "maxResults": maxResults
         ]
         let headers: HTTPHeaders = [

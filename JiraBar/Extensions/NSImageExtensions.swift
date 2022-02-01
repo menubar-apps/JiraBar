@@ -18,9 +18,7 @@ extension NSImage {
     
     static func imageFromUrl(fromURL url: URL) -> NSImage? {
         guard let data = try? Foundation.Data(contentsOf: url) else { return nil }
-        guard let image = NSImage(data: data) else {
-            print("OOOPSIE")
-            return nil }
+        guard let image = NSImage(data: data) else { return nil }
         return image
     }
 }

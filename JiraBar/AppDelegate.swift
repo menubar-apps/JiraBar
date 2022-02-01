@@ -70,16 +70,24 @@ extension AppDelegate {
                 
                     for issue in issuess {
                         let issueItem = NSMenuItem(title: "", action: #selector(self.openLink), keyEquivalent: "")
-                        let issueItemTitle = NSMutableAttributedString(string: issue.fields.summary.trunc(length: 50))
+                        let issueItemTitle = NSMutableAttributedString(string: "")
+                            .appendString(string: issue.fields.summary.trunc(length: 50))
                             .appendNewLine()
+                            .appendIcon(iconName: "hash", color: NSColor.gray)
                             .appendString(string: issue.key, color: "#888888")
                             .appendSeparator()
+                            .appendIcon(iconName: "project", color: NSColor.gray)
+                            .appendString(string: issue.fields.project.name, color: "#888888")
+                            .appendSeparator()
                             .appendString(string: issue.fields.issuetype.name, color: "#888888")
+
                         
                         issueItem.attributedTitle = issueItemTitle
-                        issueItem.toolTip = issue.fields.summary
+                        if issue.fields.summary.count > 50 {
+                            issueItem.toolTip = issue.fields.summary
+                        }
                         issueItem.representedObject = URL(string: "\(self.jiraHost)/browse/\(issue.key)")
-                        
+                                                
                         self.jiraClient.getTransitionsByIssueKey(issueKey: issue.key) { transitions in
                             if !transitions.isEmpty {
                                 let transitionsMenu = NSMenu()
@@ -97,11 +105,11 @@ extension AppDelegate {
             }
             
             self.menu.addItem(.separator())
-            self.menu.addItem(withTitle: "Refresh", action: #selector(self.refreshMenu), keyEquivalent: "R")
+            self.menu.addItem(withTitle: "Refresh", action: #selector(self.refreshMenu), keyEquivalent: "")
             self.menu.addItem(.separator())
-            self.menu.addItem(withTitle: "Preferences...", action: #selector(self.openPrefecencesWindow), keyEquivalent: ",")
+            self.menu.addItem(withTitle: "Preferences...", action: #selector(self.openPrefecencesWindow), keyEquivalent: "")
             self.menu.addItem(withTitle: "About JiraBar", action: #selector(self.openAboutWindow), keyEquivalent: "")
-            self.menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "q")
+            self.menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
         }
         
     }
