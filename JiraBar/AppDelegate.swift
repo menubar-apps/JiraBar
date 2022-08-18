@@ -40,6 +40,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
         timer?.fire()
         RunLoop.main.add(timer!, forMode: .common)
+        
+        NSApp.setActivationPolicy(.accessory)
 
     }
 
