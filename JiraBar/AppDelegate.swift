@@ -96,7 +96,8 @@ extension AppDelegate {
                                 issueItem.submenu = transitionsMenu
 
                                 for transition in transitions {
-                                    transitionsMenu.addItem(withTitle: transition.name, action: nil, keyEquivalent: "")
+                                    let transitionItem = NSMenuItem(title: transition.name, action: #selector(self.transitionIssue), keyEquivalent: "")
+                                    transitionsMenu.addItem(transitionItem)
                                 }
                             }
                         }
@@ -113,7 +114,14 @@ extension AppDelegate {
             self.menu.addItem(withTitle: "About JiraBar", action: #selector(self.openAboutWindow), keyEquivalent: "")
             self.menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
         }
+    }
+    
+    
+    @objc
+    func transitionIssue(_ sender: NSMenuItem) {
+        let issueKeyAndTo = sender.representedObject as! [String]
         
+        jiraClient.transitionIssue(issueKey: issueKeyAndTo[0], to: issueKeyAndTo[1])
     }
     
     @objc

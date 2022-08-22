@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		769F4E4B2775640900594911 /* JiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		769F4E4B2775640900594911 /* jiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		769F4E4E2775640900594911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		769F4E502775640900594911 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		769F4E522775640A00594911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		769F4E4C2775640900594911 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				769F4E4B2775640900594911 /* JiraBar.app */,
+				769F4E4B2775640900594911 /* jiraBar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,9 +119,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		769F4E4A2775640900594911 /* JiraBar */ = {
+		769F4E4A2775640900594911 /* jiraBar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 769F4E5A2775640A00594911 /* Build configuration list for PBXNativeTarget "JiraBar" */;
+			buildConfigurationList = 769F4E5A2775640A00594911 /* Build configuration list for PBXNativeTarget "jiraBar" */;
 			buildPhases = (
 				769F4E472775640900594911 /* Sources */,
 				769F4E482775640900594911 /* Frameworks */,
@@ -131,13 +131,13 @@
 			);
 			dependencies = (
 			);
-			name = JiraBar;
+			name = jiraBar;
 			packageProductDependencies = (
 				769F4E5E277567E200594911 /* Alamofire */,
 				769F4E642776430F00594911 /* Defaults */,
 			);
 			productName = JiraBar;
-			productReference = 769F4E4B2775640900594911 /* JiraBar.app */;
+			productReference = 769F4E4B2775640900594911 /* jiraBar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -155,7 +155,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 769F4E462775640900594911 /* Build configuration list for PBXProject "JiraBar" */;
+			buildConfigurationList = 769F4E462775640900594911 /* Build configuration list for PBXProject "jiraBar" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -172,7 +172,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				769F4E4A2775640900594911 /* JiraBar */,
+				769F4E4A2775640900594911 /* jiraBar */,
 			);
 		};
 /* End PBXProject section */
@@ -349,6 +349,7 @@
 				DEVELOPMENT_TEAM = UV3HUS49VJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -376,6 +377,7 @@
 				DEVELOPMENT_TEAM = UV3HUS49VJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -394,7 +396,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		769F4E462775640900594911 /* Build configuration list for PBXProject "JiraBar" */ = {
+		769F4E462775640900594911 /* Build configuration list for PBXProject "jiraBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				769F4E582775640A00594911 /* Debug */,
@@ -403,7 +405,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		769F4E5A2775640A00594911 /* Build configuration list for PBXNativeTarget "JiraBar" */ = {
+		769F4E5A2775640A00594911 /* Build configuration list for PBXNativeTarget "jiraBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				769F4E5B2775640A00594911 /* Debug */,
