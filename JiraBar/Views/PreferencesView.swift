@@ -24,7 +24,6 @@ struct PreferencesView: View {
                     Text("Jira Server: use your password as a token")
                         .font(.footnote)
                     
-                    
                     Divider()
                     
                     TextField("Jira Host:", text: $jiraHost)

@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let icon = NSImage(named: "jira-icon")
         icon?.isTemplate = false
         statusButton.image = icon
+        statusButton.imagePosition = NSControl.ImagePosition.imageLeft
         
         statusBarItem.menu = menu
         
@@ -63,6 +64,7 @@ extension AppDelegate {
         
         jiraClient.getIssuesByJql() { resp in
             if let issues = resp.issues {
+                self.statusBarItem.button?.title = String(issues.count)
                 let issuesByStatus = Dictionary(grouping: issues) { $0.fields.status.name }
                     .sorted { $0.key < $1.key }
 
