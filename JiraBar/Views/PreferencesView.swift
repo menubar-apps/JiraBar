@@ -28,7 +28,7 @@ struct PreferencesView: View {
                     
                     TextField("Jira Host:", text: $jiraHost)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("JQL query:", text: $jql)
+                    TextField("JQL Query:", text: $jql)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Use advanced search in Jira to create a JQL query and then paste it here")
                         .font(.footnote)

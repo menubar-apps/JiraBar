@@ -110,7 +110,13 @@ extension AppDelegate {
             }
             
             self.menu.addItem(.separator())
-            self.menu.addItem(withTitle: "Refresh", action: #selector(self.refreshMenu), keyEquivalent: "")
+            let refreshItem = NSMenuItem(title: "Refresh", action: #selector(self.refreshMenu), keyEquivalent: "")
+            refreshItem.image = NSImage(systemSymbolName: "arrow.clockwise", accessibilityDescription: nil)
+            self.menu.addItem(refreshItem)
+            let openSearchResultsItem = NSMenuItem(title: "Open Search results", action: #selector(self.openSearchResults), keyEquivalent: "")
+            openSearchResultsItem.image = NSImage(systemSymbolName: "arrow.up.forward.app", accessibilityDescription: nil)
+            self.menu.addItem(openSearchResultsItem)
+
             self.menu.addItem(.separator())
             self.menu.addItem(withTitle: "Preferences...", action: #selector(self.openPrefecencesWindow), keyEquivalent: "")
             self.menu.addItem(withTitle: "About JiraBar", action: #selector(self.openAboutWindow), keyEquivalent: "")
@@ -124,6 +130,12 @@ extension AppDelegate {
         let issueKeyAndTo = sender.representedObject as! [String]
         
         jiraClient.transitionIssue(issueKey: issueKeyAndTo[0], to: issueKeyAndTo[1])
+    }
+    
+    @objc
+    func openSearchResults() {
+        let encodedPath = jql.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        NSWorkspace.shared.open(URL(string: jiraHost + "/issues?jql=" + encodedPath!)!)
     }
     
     @objc
