@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		769F4E4F2775640900594911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E4E2775640900594911 /* AppDelegate.swift */; };
-		769F4E512775640900594911 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E502775640900594911 /* ViewController.swift */; };
 		769F4E532775640A00594911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E522775640A00594911 /* Assets.xcassets */; };
 		769F4E562775640A00594911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E542775640A00594911 /* Main.storyboard */; };
 		769F4E5F277567E200594911 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 769F4E5E277567E200594911 /* Alamofire */; };
@@ -27,7 +26,6 @@
 /* Begin PBXFileReference section */
 		769F4E4B2775640900594911 /* jiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		769F4E4E2775640900594911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		769F4E502775640900594911 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		769F4E522775640A00594911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		769F4E552775640A00594911 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		769F4E572775640A00594911 /* JiraBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiraBar.entitlements; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 				769F4E6927764BFE00594911 /* Extensions */,
 				769F4E60277569D900594911 /* Jira */,
 				769F4E4E2775640900594911 /* AppDelegate.swift */,
-				769F4E502775640900594911 /* ViewController.swift */,
 				769F4E522775640A00594911 /* Assets.xcassets */,
 				769F4E542775640A00594911 /* Main.storyboard */,
 				769F4E572775640A00594911 /* JiraBar.entitlements */,
@@ -195,7 +192,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				769F4E712776AE4700594911 /* StringExtensions.swift in Sources */,
-				769F4E512775640900594911 /* ViewController.swift in Sources */,
 				769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */,
 				769F4E682776442200594911 /* JiraDtos.swift in Sources */,
 				769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */,
@@ -358,7 +354,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pavelmakhov.JiraBar;
+				PRODUCT_BUNDLE_IDENTIFIER = debug.com.pavelmakhov.JiraBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

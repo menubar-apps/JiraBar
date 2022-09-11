@@ -22,6 +22,7 @@ public class JiraClient {
             .authorization(username: jiraUsername, password: jiraToken),
             .accept("application/json")
         ]
+                
         AF.request(url, method: .get, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: JiraResponse.self) { response in
@@ -39,7 +40,12 @@ public class JiraClient {
     func getTransitionsByIssueKey(issueKey: String, completion: @escaping (([Transition]) -> Void)) -> Void {
         let url = "\(jiraHost)/rest/api/2/issue/\(issueKey)/transitions"
         
-        AF.request(url, method: .get)
+        let headers: HTTPHeaders = [
+            .authorization(username: jiraUsername, password: jiraToken),
+            .accept("application/json")
+        ]
+                
+        AF.request(url, method: .get, parameters: nil, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: TransitionsResponse.self) { response in
                 switch response.result {
@@ -53,22 +59,30 @@ public class JiraClient {
             }
     }
     
-    func transitionIssue(issueKey: String, to: String) -> Void {
+    func transitionIssue(issueKey: String, to: String, completion: @escaping (() -> Void)) -> Void {
         let url = "\(jiraHost)/rest/api/2/issue/\(issueKey)/transitions"
         let parameters = [
             "transition": [
-                "id": issueKey
+                "id": to
             ]
         ]
         
-        AF.request(url, method: .post, parameters: parameters)
+        let headers: HTTPHeaders = [
+            .authorization(username: jiraUsername, password: jiraToken),
+            .accept("application/json"),
+            .contentType("application/json")
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 switch response.result {
                 case .success(let response):
                     sendNotification(body: "Successfully transitioned issue")
+                    completion()
                 case .failure(let error):
                     print("\(url):  \(error)")
+                    print(response.debugDescription)
 //                    completion([Transition]())
                     sendNotification(body: error.localizedDescription)
                 }

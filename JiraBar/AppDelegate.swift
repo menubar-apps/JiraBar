@@ -21,11 +21,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var preferencesWindow: NSWindow!
     var aboutWindow: NSWindow!
     
+    var unknownPersonAvatar: NSImage!
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.windowClosed), name: NSWindow.willCloseNotification, object: nil)
         guard let statusButton = statusBarItem.button else { return }
-        let icon = NSImage(named: "jira-icon")
+        let icon = NSImage(named: "mark-gradient-white-jira")
+        icon?.size = NSSize(width: 18, height: 18)
         icon?.isTemplate = false
         statusButton.image = icon
         statusButton.imagePosition = NSControl.ImagePosition.imageLeft
@@ -43,6 +46,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         RunLoop.main.add(timer!, forMode: .common)
         
         NSApp.setActivationPolicy(.accessory)
+        
+        let config = NSImage.SymbolConfiguration(pointSize: 24, weight: .regular)
+        unknownPersonAvatar = NSImage(systemSymbolName: "person.crop.circle.badge.questionmark", accessibilityDescription: nil)!.withSymbolConfiguration(config)!
 
     }
 
@@ -74,6 +80,7 @@ extension AppDelegate {
                 
                     for issue in issuess {
                         let issueItem = NSMenuItem(title: "", action: #selector(self.openLink), keyEquivalent: "")
+                        
                         let issueItemTitle = NSMutableAttributedString(string: "")
                             .appendString(string: issue.fields.summary.trunc(length: 50))
                             .appendNewLine()
@@ -81,7 +88,7 @@ extension AppDelegate {
                             .appendString(string: issue.key, color: "#888888")
                             .appendSeparator()
                             .appendIcon(iconName: "project", color: NSColor.gray)
-                            .appendString(string: issue.fields.project.name, color: "#888888")
+                            .appendString(string: issue.fields.assignee?.displayName ?? "Unassign", color: "#888888")
                             .appendSeparator()
                             .appendString(string: issue.fields.issuetype.name, color: "#888888")
 
@@ -99,6 +106,7 @@ extension AppDelegate {
 
                                 for transition in transitions {
                                     let transitionItem = NSMenuItem(title: transition.name, action: #selector(self.transitionIssue), keyEquivalent: "")
+                                    transitionItem.representedObject = [issue.key, transition.id]
                                     transitionsMenu.addItem(transitionItem)
                                 }
                             }
@@ -113,9 +121,14 @@ extension AppDelegate {
             let refreshItem = NSMenuItem(title: "Refresh", action: #selector(self.refreshMenu), keyEquivalent: "")
             refreshItem.image = NSImage(systemSymbolName: "arrow.clockwise", accessibilityDescription: nil)
             self.menu.addItem(refreshItem)
+            
             let openSearchResultsItem = NSMenuItem(title: "Open Search results", action: #selector(self.openSearchResults), keyEquivalent: "")
             openSearchResultsItem.image = NSImage(systemSymbolName: "arrow.up.forward.app", accessibilityDescription: nil)
             self.menu.addItem(openSearchResultsItem)
+            
+            let createNewItem = NSMenuItem(title: "Create issue", action: #selector(self.openCreateNewIssue), keyEquivalent: "")
+            createNewItem.image = NSImage(systemSymbolName: "plus.square", accessibilityDescription: nil)
+            self.menu.addItem(createNewItem)
 
             self.menu.addItem(.separator())
             self.menu.addItem(withTitle: "Preferences...", action: #selector(self.openPrefecencesWindow), keyEquivalent: "")
@@ -129,13 +142,21 @@ extension AppDelegate {
     func transitionIssue(_ sender: NSMenuItem) {
         let issueKeyAndTo = sender.representedObject as! [String]
         
-        jiraClient.transitionIssue(issueKey: issueKeyAndTo[0], to: issueKeyAndTo[1])
+        jiraClient.transitionIssue(issueKey: issueKeyAndTo[0], to: issueKeyAndTo[1]) {
+            print("refreshing")
+            self.refreshMenu()
+        }
     }
-    
+
     @objc
     func openSearchResults() {
         let encodedPath = jql.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
         NSWorkspace.shared.open(URL(string: jiraHost + "/issues?jql=" + encodedPath!)!)
+    }
+    
+    @objc
+    func openCreateNewIssue() {
+        NSWorkspace.shared.open(URL(string: jiraHost + "/secure/CreateIssue!default.jspa")!)
     }
     
     @objc

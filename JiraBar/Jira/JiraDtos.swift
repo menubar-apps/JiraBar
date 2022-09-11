@@ -27,12 +27,14 @@ struct Fields: Codable {
     var status: IssueStatus
     var issuetype: IssueType
     var project: Project
+    var assignee: User?
     
     enum CodingKeys: String, CodingKey {
         case summary
         case status
         case issuetype
         case project
+        case assignee
     }
 }
 
@@ -57,8 +59,18 @@ struct IssueType: Codable {
 struct Project: Codable {
     var name: String
     
-    enum CodingKeus: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case name
+    }
+}
+
+struct User: Codable {
+    var name: String
+    var displayName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case displayName
     }
 }
 
@@ -75,8 +87,10 @@ struct TransitionsResponse: Codable {
 
 struct Transition: Codable {
     var name: String
+    var id: String
     
     enum CodingKeys: String, CodingKey {
         case name
+        case id
     }
 }
