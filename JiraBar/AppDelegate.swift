@@ -10,7 +10,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @Default(.jql) var jql
     @Default(.jiraHost) var jiraHost
 
-
     let jiraClient = JiraClient()
     
     var statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -29,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let statusButton = statusBarItem.button else { return }
         let icon = NSImage(named: "mark-gradient-white-jira")
         icon?.size = NSSize(width: 18, height: 18)
-        icon?.isTemplate = false
+        icon?.isTemplate = true
         statusButton.image = icon
         statusButton.imagePosition = NSControl.ImagePosition.imageLeft
         

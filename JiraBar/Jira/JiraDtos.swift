@@ -65,7 +65,7 @@ struct Project: Codable {
 }
 
 struct User: Codable {
-    var name: String
+    var name: String?
     var displayName: String
     
     enum CodingKeys: String, CodingKey {

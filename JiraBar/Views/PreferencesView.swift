@@ -3,11 +3,14 @@ import Defaults
 
 struct PreferencesView: View {
     @Default(.jiraUsername) var jiraUsername
-    @Default(.jiraToken) var jiraToken
     @Default(.jiraHost) var jiraHost
     @Default(.jql) var jql
     @Default(.refreshRate) var refreshRate
     @Default(.maxResults) var maxResults
+    
+    @FromKeychain(.jiraToken) var jiraToken
+    
+    @StateObject private var jiraTokenValidator = JiraTokenValidator()
     
     var body: some View {
         
@@ -15,10 +18,21 @@ struct PreferencesView: View {
         HStack {
                 Spacer()
                 Form {
+                    TextField("Jira Host:", text: $jiraHost)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("Jira Username:", text: $jiraUsername)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     SecureField("Jira Token:", text: $jiraToken)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .overlay(
+                            Image(systemName: jiraTokenValidator.iconName).foregroundColor(jiraTokenValidator.iconColor)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .padding(.trailing, 8)
+                            )
+                        .onChange(of: jiraToken) { _ in
+                            jiraTokenValidator.validate()
+                        }
+                    
                     Text("Jira Cloud: generate an [API Token](https://id.atlassian.com/manage/api-tokens)")
                         .font(.footnote)
                     Text("Jira Server: use your password as a token")
@@ -26,8 +40,6 @@ struct PreferencesView: View {
                     
                     Divider()
                     
-                    TextField("Jira Host:", text: $jiraHost)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("JQL Query:", text: $jql)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Use advanced search in Jira to create a JQL query and then paste it here")
@@ -49,6 +61,9 @@ struct PreferencesView: View {
         }
         .padding()
         .frame(width: 500)
+        .onAppear() {
+            jiraTokenValidator.validate()
+        }
     }
 }
 

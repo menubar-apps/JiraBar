@@ -2,14 +2,17 @@ import Foundation
 import Alamofire
 import Defaults
 import UserNotifications
+import KeychainAccess
 
 
 public class JiraClient {
     @Default(.jiraUsername) var jiraUsername
-    @Default(.jiraToken) var jiraToken
+//    @Default(.jiraToken) var jiraToken
     @Default(.jiraHost) var jiraHost
     @Default(.jql) var jql
     @Default(.maxResults) var maxResults
+    
+    @FromKeychain(.jiraToken) var jiraToken
     
     func getIssuesByJql(completion:@escaping ((JiraResponse) -> Void)) -> Void {
         let url = "\(jiraHost)/rest/api/2/search"
@@ -22,7 +25,6 @@ public class JiraClient {
             .authorization(username: jiraUsername, password: jiraToken),
             .accept("application/json")
         ]
-                
         AF.request(url, method: .get, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: JiraResponse.self) { response in
@@ -44,7 +46,7 @@ public class JiraClient {
             .authorization(username: jiraUsername, password: jiraToken),
             .accept("application/json")
         ]
-                
+
         AF.request(url, method: .get, parameters: nil, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: TransitionsResponse.self) { response in
@@ -84,6 +86,28 @@ public class JiraClient {
                     print("\(url):  \(error)")
                     print(response.debugDescription)
 //                    completion([Transition]())
+                    sendNotification(body: error.localizedDescription)
+                }
+            }
+    }
+    
+    func getMyself(completion: @escaping(User?) -> Void) {
+        let url = "\(jiraHost)/rest/api/2/myself"
+        
+        let headers: HTTPHeaders = [
+            .authorization(username: jiraUsername, password: jiraToken),
+            .accept("application/json")
+        ]
+
+        AF.request(url, method: .get, parameters: nil, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: User.self) { response in
+                switch response.result {
+                case .success(let user):
+                    completion(user)
+                case .failure(let error):
+                    completion(nil)
+                    print(error)
                     sendNotification(body: error.localizedDescription)
                 }
             }

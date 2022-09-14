@@ -21,6 +21,9 @@
 		769F4E75277795E700594911 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E74277795E700594911 /* AboutView.swift */; };
 		769F4E772777993400594911 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E762777993400594911 /* PreferencesView.swift */; };
 		769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E7827779E8000594911 /* DefaultsExtensions.swift */; };
+		76D5F9DC28D212E5009EBD80 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D5F9DB28D212E5009EBD80 /* Keychain.swift */; };
+		76D5F9DF28D2158E009EBD80 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 76D5F9DE28D2158E009EBD80 /* KeychainAccess */; };
+		76D5F9E128D2606D009EBD80 /* JiraTokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D5F9E028D2606D009EBD80 /* JiraTokenValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,8 @@
 		769F4E74277795E700594911 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		769F4E762777993400594911 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		769F4E7827779E8000594911 /* DefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsExtensions.swift; sourceTree = "<group>"; };
+		76D5F9DB28D212E5009EBD80 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		76D5F9E028D2606D009EBD80 /* JiraTokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraTokenValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			files = (
 				769F4E652776430F00594911 /* Defaults in Frameworks */,
 				769F4E5F277567E200594911 /* Alamofire in Frameworks */,
+				76D5F9DF28D2158E009EBD80 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +85,7 @@
 				769F4E522775640A00594911 /* Assets.xcassets */,
 				769F4E542775640A00594911 /* Main.storyboard */,
 				769F4E572775640A00594911 /* JiraBar.entitlements */,
+				76D5F9DB28D212E5009EBD80 /* Keychain.swift */,
 			);
 			path = JiraBar;
 			sourceTree = "<group>";
@@ -88,6 +95,7 @@
 			children = (
 				769F4E61277569E700594911 /* JiraClient.swift */,
 				769F4E672776442200594911 /* JiraDtos.swift */,
+				76D5F9E028D2606D009EBD80 /* JiraTokenValidator.swift */,
 			);
 			path = Jira;
 			sourceTree = "<group>";
@@ -132,6 +140,7 @@
 			packageProductDependencies = (
 				769F4E5E277567E200594911 /* Alamofire */,
 				769F4E642776430F00594911 /* Defaults */,
+				76D5F9DE28D2158E009EBD80 /* KeychainAccess */,
 			);
 			productName = JiraBar;
 			productReference = 769F4E4B2775640900594911 /* jiraBar.app */;
@@ -164,6 +173,7 @@
 			packageReferences = (
 				769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				769F4E632776430F00594911 /* XCRemoteSwiftPackageReference "Defaults" */,
+				76D5F9DD28D2158E009EBD80 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 769F4E4C2775640900594911 /* Products */;
 			projectDirPath = "";
@@ -196,10 +206,12 @@
 				769F4E682776442200594911 /* JiraDtos.swift in Sources */,
 				769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */,
 				769F4E75277795E700594911 /* AboutView.swift in Sources */,
+				76D5F9DC28D212E5009EBD80 /* Keychain.swift in Sources */,
 				769F4E772777993400594911 /* PreferencesView.swift in Sources */,
 				769F4E6D27764C6900594911 /* NSColorExtensions.swift in Sources */,
 				769F4E4F2775640900594911 /* AppDelegate.swift in Sources */,
 				769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */,
+				76D5F9E128D2606D009EBD80 /* JiraTokenValidator.swift in Sources */,
 				769F4E62277569E700594911 /* JiraClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,6 +441,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		76D5F9DD28D2158E009EBD80 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -441,6 +461,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 769F4E632776430F00594911 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
+		};
+		76D5F9DE28D2158E009EBD80 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76D5F9DD28D2158E009EBD80 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
