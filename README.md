@@ -18,7 +18,7 @@ Native MacOS menubar application to show Jira issues in your menu bar:
 
 # Installation
 
-[Download](https://github.com/menubar-apps/PullBar/releases/latest/download/pullBar.1.1.dmg) and install the latest release.
+[Download](https://github.com/menubar-apps/JiraBar/releases/download/v1.0/jiraBar.1.0.dmg) and install the latest release.
 
 
 
