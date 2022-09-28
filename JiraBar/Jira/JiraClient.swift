@@ -7,7 +7,6 @@ import KeychainAccess
 
 public class JiraClient {
     @Default(.jiraUsername) var jiraUsername
-//    @Default(.jiraToken) var jiraToken
     @Default(.jiraHost) var jiraHost
     @Default(.jql) var jql
     @Default(.maxResults) var maxResults
@@ -21,10 +20,14 @@ public class JiraClient {
             "fields":"id,assignee,summary,status,issuetype,project",
             "maxResults": maxResults
         ]
-        let headers: HTTPHeaders = [
-            .authorization(username: jiraUsername, password: jiraToken),
+        var headers: HTTPHeaders = [
             .accept("application/json")
         ]
+        
+        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        }
+        
         AF.request(url, method: .get, parameters: parameters, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: JiraResponse.self) { response in
@@ -42,12 +45,15 @@ public class JiraClient {
     func getTransitionsByIssueKey(issueKey: String, completion: @escaping (([Transition]) -> Void)) -> Void {
         let url = "\(jiraHost)/rest/api/2/issue/\(issueKey)/transitions"
         
-        let headers: HTTPHeaders = [
-            .authorization(username: jiraUsername, password: jiraToken),
+        var headers: HTTPHeaders = [
             .accept("application/json")
         ]
+        
+        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        }
 
-        AF.request(url, method: .get, parameters: nil, headers: headers)
+        AF.request(url, method: .get, parameters: nil, headers: (!jiraUsername.isEmpty && !jiraToken.isEmpty) ? headers : nil)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: TransitionsResponse.self) { response in
                 switch response.result {
@@ -69,11 +75,14 @@ public class JiraClient {
             ]
         ]
         
-        let headers: HTTPHeaders = [
-            .authorization(username: jiraUsername, password: jiraToken),
+        var headers: HTTPHeaders = [
             .accept("application/json"),
             .contentType("application/json")
         ]
+        
+        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        }
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200..<300)
@@ -94,10 +103,13 @@ public class JiraClient {
     func getMyself(completion: @escaping(User?) -> Void) {
         let url = "\(jiraHost)/rest/api/2/myself"
         
-        let headers: HTTPHeaders = [
-            .authorization(username: jiraUsername, password: jiraToken),
+        var headers: HTTPHeaders = [
             .accept("application/json")
         ]
+        
+        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        }
 
         AF.request(url, method: .get, parameters: nil, headers: headers)
             .validate(statusCode: 200..<300)

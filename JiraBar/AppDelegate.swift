@@ -115,6 +115,9 @@ extension AppDelegate {
                     }
                 }
             }
+            else {
+                self.statusBarItem.button?.title = String(0)
+            }
             
             self.menu.addItem(.separator())
             let refreshItem = NSMenuItem(title: "Refresh", action: #selector(self.refreshMenu), keyEquivalent: "")
