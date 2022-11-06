@@ -2,7 +2,6 @@ import SwiftUI
 import Defaults
 
 struct PreferencesView: View {
-    @Default(.jiraUsername) var jiraUsername
     @Default(.jiraHost) var jiraHost
     @Default(.jql) var jql
     @Default(.refreshRate) var refreshRate
@@ -19,8 +18,6 @@ struct PreferencesView: View {
                 Spacer()
                 Form {
                     TextField("Jira Host:", text: $jiraHost)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Jira Username:", text: $jiraUsername)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     SecureField("Jira Token:", text: $jiraToken)
                         .textFieldStyle(RoundedBorderTextFieldStyle())

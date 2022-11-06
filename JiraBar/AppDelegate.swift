@@ -125,11 +125,11 @@ extension AppDelegate {
             self.menu.addItem(refreshItem)
             
             let openSearchResultsItem = NSMenuItem(title: "Open Search results", action: #selector(self.openSearchResults), keyEquivalent: "")
-            openSearchResultsItem.image = NSImage(systemSymbolName: "arrow.up.forward.app", accessibilityDescription: nil)
+            openSearchResultsItem.image = NSImage(systemSymbolName: "magnifyingglass", accessibilityDescription: nil)
             self.menu.addItem(openSearchResultsItem)
             
             let createNewItem = NSMenuItem(title: "Create issue", action: #selector(self.openCreateNewIssue), keyEquivalent: "")
-            createNewItem.image = NSImage(systemSymbolName: "plus.square", accessibilityDescription: nil)
+            createNewItem.image = NSImage(systemSymbolName: "plus", accessibilityDescription: nil)
             self.menu.addItem(createNewItem)
 
             self.menu.addItem(.separator())

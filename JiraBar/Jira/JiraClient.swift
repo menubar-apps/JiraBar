@@ -6,7 +6,6 @@ import KeychainAccess
 
 
 public class JiraClient {
-    @Default(.jiraUsername) var jiraUsername
     @Default(.jiraHost) var jiraHost
     @Default(.jql) var jql
     @Default(.maxResults) var maxResults
@@ -24,8 +23,8 @@ public class JiraClient {
             .accept("application/json")
         ]
         
-        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
-            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        if !jiraToken.isEmpty {
+            headers.add(.authorization(bearerToken: jiraToken))
         }
         
         AF.request(url, method: .get, parameters: parameters, headers: headers)
@@ -49,11 +48,11 @@ public class JiraClient {
             .accept("application/json")
         ]
         
-        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
-            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        if !jiraToken.isEmpty {
+            headers.add(.authorization(bearerToken: jiraToken))
         }
 
-        AF.request(url, method: .get, parameters: nil, headers: (!jiraUsername.isEmpty && !jiraToken.isEmpty) ? headers : nil)
+        AF.request(url, method: .get, parameters: nil, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: TransitionsResponse.self) { response in
                 switch response.result {
@@ -80,8 +79,8 @@ public class JiraClient {
             .contentType("application/json")
         ]
         
-        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
-            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        if !jiraToken.isEmpty {
+            headers.add(.authorization(bearerToken: jiraToken))
         }
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
@@ -107,8 +106,8 @@ public class JiraClient {
             .accept("application/json")
         ]
         
-        if !jiraUsername.isEmpty && !jiraToken.isEmpty {
-            headers.add(.authorization(username: jiraUsername, password: jiraToken))
+        if !jiraToken.isEmpty {
+            headers.add(.authorization(bearerToken: jiraToken))
         }
 
         AF.request(url, method: .get, parameters: nil, headers: headers)
