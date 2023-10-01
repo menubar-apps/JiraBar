@@ -12,22 +12,25 @@ struct JiraResponse: Codable {
     }
 }
 
-struct Issue: Codable {
+struct Issue: Codable, Hashable {
     var key: String
     var fields: Fields
+    var transitions: [Transition]?
     
     enum CodingKeys: String, CodingKey {
         case key
         case fields
+        case transitions
     }
 }
 
-struct Fields: Codable {
+struct Fields: Codable, Hashable {
     var summary: String
     var status: IssueStatus
     var issuetype: IssueType
     var project: Project
     var assignee: User?
+    var creator: User?
     
     enum CodingKeys: String, CodingKey {
         case summary
@@ -35,10 +38,11 @@ struct Fields: Codable {
         case issuetype
         case project
         case assignee
+        case creator
     }
 }
 
-struct IssueStatus: Codable {
+struct IssueStatus: Codable, Hashable {
     var name: String
     var iconUrl: URL?
     
@@ -48,7 +52,7 @@ struct IssueStatus: Codable {
     }
 }
 
-struct IssueType: Codable {
+struct IssueType: Codable, Hashable {
     var name: String
     
     enum CodingKeys: String, CodingKey {
@@ -56,7 +60,7 @@ struct IssueType: Codable {
     }
 }
 
-struct Project: Codable {
+struct Project: Codable, Hashable {
     var name: String
     
     enum CodingKeys: String, CodingKey {
@@ -64,7 +68,7 @@ struct Project: Codable {
     }
 }
 
-struct User: Codable {
+struct User: Codable, Hashable {
     var name: String?
     var displayName: String
     
@@ -85,7 +89,7 @@ struct TransitionsResponse: Codable {
     }
 }
 
-struct Transition: Codable {
+struct Transition: Codable, Hashable {
     var name: String
     var id: String
     

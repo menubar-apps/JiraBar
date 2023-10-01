@@ -4,19 +4,25 @@ import Defaults
 import UserNotifications
 import KeychainAccess
 
-
 public class JiraClient {
+    @Default(.username) var username
     @Default(.jiraHost) var jiraHost
-    @Default(.jql) var jql
+
     @Default(.maxResults) var maxResults
     
     @FromKeychain(.jiraToken) var jiraToken
     
-    func getIssuesByJql(completion:@escaping ((JiraResponse) -> Void)) -> Void {
+    func getIssuesByJql(jql: String, completion:@escaping (Result<[Issue], ClientError>) -> Void) -> Void {
+        
+        if jiraHost.isEmpty || jiraToken.isEmpty || username.isEmpty {
+            completion(.failure(.credentialsNotSet))
+            return
+        }
+        
         let url = "\(jiraHost)/rest/api/2/search"
         let parameters = [
             "jql": jql,
-            "fields":"id,assignee,summary,status,issuetype,project",
+            "fields": "id,assignee,creator,summary,status,issuetype,project",
             "maxResults": maxResults
         ]
         var headers: HTTPHeaders = [
@@ -24,7 +30,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: username, password: jiraToken))
         }
         
         AF.request(url, method: .get, parameters: parameters, headers: headers)
@@ -32,11 +38,9 @@ public class JiraClient {
             .responseDecodable(of: JiraResponse.self) { response in
                 switch response.result {
                 case .success(let response):
-                    completion(response)
+                    completion(.success(response.issues ?? []))
                 case .failure(let error):
-                    print("\(url):  \(error)")
-                    completion(JiraResponse(total: 0))
-                    sendNotification(body: error.localizedDescription)
+                   completion(.failure(.unexpected(message: error.localizedDescription)))
                 }
             }
     }
@@ -49,7 +53,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: username, password: jiraToken))
         }
 
         AF.request(url, method: .get, parameters: nil, headers: headers)
@@ -61,7 +65,6 @@ public class JiraClient {
                 case .failure(let error):
                     print("\(url):  \(error)")
                     completion([Transition]())
-                    sendNotification(body: error.localizedDescription)
                 }
             }
     }
@@ -88,13 +91,11 @@ public class JiraClient {
             .responseJSON { response in
                 switch response.result {
                 case .success(let response):
-                    sendNotification(body: "Successfully transitioned issue")
                     completion()
                 case .failure(let error):
                     print("\(url):  \(error)")
                     print(response.debugDescription)
 //                    completion([Transition]())
-                    sendNotification(body: error.localizedDescription)
                 }
             }
     }
@@ -119,30 +120,12 @@ public class JiraClient {
                 case .failure(let error):
                     completion(nil)
                     print(error)
-                    sendNotification(body: error.localizedDescription)
                 }
             }
     }
 }
 
-
-func sendNotification(body: String = "") {
-  let content = UNMutableNotificationContent()
-  content.title = "JiraBar Error"
-
-  if body.count > 0 {
-    content.body = body
-  }
-  
-  // you can alse add a subtitle
-//  content.subtitle = "subtitle here... "
-
-  let uuidString = UUID().uuidString
-  let request = UNNotificationRequest(
-    identifier: uuidString,
-    content: content, trigger: nil)
-
-  let notificationCenter = UNUserNotificationCenter.current()
-  notificationCenter.requestAuthorization(options: [.alert, .sound]) { _, _ in }
-  notificationCenter.add(request)
+enum ClientError: Error {
+    case unexpected(message: String?)
+    case credentialsNotSet
 }
