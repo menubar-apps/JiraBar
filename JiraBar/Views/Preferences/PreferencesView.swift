@@ -4,8 +4,6 @@ import Defaults
 struct PreferencesView: View {
     @Default(.username) var username
     @Default(.jiraHost) var jiraHost
-//    @Default(.jql) var jql
-    @Default(.refreshRate) var refreshRate
     @Default(.maxResults) var maxResults
     
     @FromKeychain(.jiraToken) var jiraToken
@@ -49,14 +47,6 @@ struct PreferencesView: View {
                 TextField("Max Results:", text: $maxResults)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 120)
-                Picker("Refresh Rate:", selection: $refreshRate) {
-                    Text("1 minute").tag(1)
-                    Text("5 minutes").tag(5)
-                    Text("10 minutes").tag(10)
-                    Text("15 minutes").tag(15)
-                    Text("30 minutes").tag(30)
-                }
-                .frame(width: 200)
             }
             .padding()
             .frame(maxWidth: .infinity)

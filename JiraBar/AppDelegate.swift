@@ -6,7 +6,6 @@ import Defaults
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @Default(.refreshRate) var refreshRate
     @Default(.jiraHost) var jiraHost
     
     var viewModel: ViewModel = ViewModel()

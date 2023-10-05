@@ -5,7 +5,6 @@ extension Defaults.Keys {
     
     static let username = Key<String>("username", default: "")
     static let jiraHost = Key<String>("jiraHost", default: "https://issues.apache.org/jira")
-//    static let jql = Key<String>("jql", default: "")
 
     static let activeTabs = Key<[TabType]>("activeTabs", default: [.first, .second])
     static let selectedTab = Key<TabType>("selectedTab", default: .first)
@@ -22,7 +21,6 @@ extension Defaults.Keys {
     static let jqlTab3 = Key<String>("jqlTab3", default: "")
     static let nameTab3 = Key<String>("nameTab3", default: "")
     
-    static let refreshRate = Key<Int>("refreshRate", default: 5)
     static let maxResults = Key<String>("maxResults", default: "10")
 }
 

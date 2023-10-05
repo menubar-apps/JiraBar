@@ -18,7 +18,7 @@ struct IssueView: View {
             VStack(alignment: .leading, spacing: 2) {
                 
                 HStack {
-                    Text("#" + issue.key)
+                    Text(issue.key)
                         .font(.footnote)
                         .padding([.leading, .trailing], 4)
                         .padding([.top, .bottom], 2)

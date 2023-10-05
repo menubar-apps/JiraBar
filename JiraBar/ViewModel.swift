@@ -41,7 +41,7 @@ class ViewModel: ObservableObject {
         case .second:
             return dictForSecondTab
         case .third:
-            return dictForFirstTab
+            return dictForThirdTab
         }
     }
     
