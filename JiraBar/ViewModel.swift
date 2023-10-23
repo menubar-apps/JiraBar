@@ -23,6 +23,10 @@ class ViewModel: ObservableObject {
     @Published var dictForFirstTab: [String:[Issue]] = [:]
     @Published var dictForSecondTab: [String:[Issue]] = [:]
     @Published var dictForThirdTab: [String:[Issue]] = [:]
+
+    @Published var issuesTab1: [Issue] = []
+    @Published var issuesTab2: [Issue] = []
+    @Published var issuesTab3: [Issue] = []
     
     @Published var tab1Loading: Bool = false
     @Published var tab2Loading: Bool = false
@@ -34,14 +38,22 @@ class ViewModel: ObservableObject {
     
     @Published var error: String?
     
-    func getIssueForSelectedTab() -> [String: [Issue]] {
+    init() {
+        print("HI!")
+    }
+    
+//    func getIssueForSelectedTab() -> [String: [Issue]] {
+    func getIssueForSelectedTab() -> [Issue] {
         switch selectedTab {
         case .first:
-            return dictForFirstTab
+            return issuesTab1
+//            return dictForFirstTab
         case .second:
-            return dictForSecondTab
+            return issuesTab2
+//            return dictForSecondTab
         case .third:
-            return dictForThirdTab
+            return issuesTab3
+//            return dictForThirdTab
         }
     }
     
@@ -52,8 +64,9 @@ class ViewModel: ObservableObject {
             
             switch res {
             case .success(let issues):
-                let temp = Dictionary(grouping: issues) { $0.fields.status.name }.sorted { $0.key < $1.key }
-                self.dictForFirstTab = Dictionary(uniqueKeysWithValues: temp)
+                self.issuesTab1 = issues
+//                let temp = Dictionary(grouping: issues) { $0.fields.status.name }.sorted { $0.key < $1.key }
+//                self.dictForFirstTab = Dictionary(uniqueKeysWithValues: temp)
                 self.tab1Loading = false
             case .failure(let failure):
                 switch failure {
@@ -68,7 +81,8 @@ class ViewModel: ObservableObject {
                 }
                 
                 self.tab1Loading = false
-                self.dictForFirstTab.removeAll()
+                self.issuesTab1.removeAll()
+//                self.dictForFirstTab.removeAll()
             }
         }
     }
@@ -79,8 +93,9 @@ class ViewModel: ObservableObject {
 
             switch res {
             case .success(let issues):
-                let temp = Dictionary(grouping: issues) { $0.fields.status.name }.sorted { $0.key < $1.key }
-                self.dictForSecondTab = Dictionary(uniqueKeysWithValues: temp)
+                self.issuesTab2 = issues
+//                let temp = Dictionary(grouping: issues) { $0.fields.status.name }.sorted { $0.key < $1.key }
+//                self.dictForSecondTab = Dictionary(uniqueKeysWithValues: temp)
                 self.tab2Loading = false
             case .failure(let failure):
                 switch failure {
@@ -95,7 +110,8 @@ class ViewModel: ObservableObject {
                 }
 
                 self.tab2Loading = false
-                self.dictForSecondTab.removeAll()
+//                self.dictForSecondTab.removeAll()
+                self.issuesTab2.removeAll()
             }
         }
     }
@@ -106,8 +122,9 @@ class ViewModel: ObservableObject {
             
             switch res {
             case .success(let issues):
-                let temp = Dictionary(grouping: issues) { $0.fields.status.name }.sorted { $0.key < $1.key }
-                self.dictForThirdTab = Dictionary(uniqueKeysWithValues: temp)
+                self.issuesTab3 = issues
+//                let temp = Dictionary(grouping: issues) { $0.fields.status.name }.sorted { $0.key < $1.key }
+//                self.dictForThirdTab = Dictionary(uniqueKeysWithValues: temp)
                 self.tab3Loading = false
             case .failure(let failure):
                 switch failure {
@@ -122,11 +139,20 @@ class ViewModel: ObservableObject {
                 }
                 
                 self.tab3Loading = false
-                self.dictForThirdTab.removeAll()
+//                self.dictForThirdTab.removeAll()
+                self.issuesTab3
+            }
+        }
+        
+        
+    }
+    func getTransitionsForIssue(issueKey: String) {
+        client.getTransitionsByIssueKey(issueKey: issueKey) { transitions in
+            if var i = self.issuesTab1.first(where: {$0.key == issueKey}) {
+                i.transitions = transitions
             }
         }
     }
-    
     private var jqlByTab: String {
         switch selectedTab {
         case .first:

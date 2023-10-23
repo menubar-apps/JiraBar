@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76694E762AE48E6E00218AEE /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76694E752AE48E6E00218AEE /* IssueViewModel.swift */; };
 		768181D12AB1EB8F0096A886 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181D02AB1EB8F0096A886 /* ContentView.swift */; };
 		768181D32AB1EEB10096A886 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181D22AB1EEB10096A886 /* ViewModel.swift */; };
 		768181D52AB1FCD50096A886 /* IssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181D42AB1FCD50096A886 /* IssueView.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		76694E752AE48E6E00218AEE /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		768181D02AB1EB8F0096A886 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		768181D22AB1EEB10096A886 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		768181D42AB1FCD50096A886 /* IssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				769F4E60277569D900594911 /* Jira */,
 				769F4E4E2775640900594911 /* AppDelegate.swift */,
 				768181D22AB1EEB10096A886 /* ViewModel.swift */,
+				76694E752AE48E6E00218AEE /* IssueViewModel.swift */,
 				769F4E522775640A00594911 /* Assets.xcassets */,
 				769F4E542775640A00594911 /* Main.storyboard */,
 				769F4E572775640A00594911 /* JiraBar.entitlements */,
@@ -258,6 +261,7 @@
 				768181DD2ABCBCEF0096A886 /* PickerTabView.swift in Sources */,
 				769F4E6D27764C6900594911 /* NSColorExtensions.swift in Sources */,
 				769F4E4F2775640900594911 /* AppDelegate.swift in Sources */,
+				76694E762AE48E6E00218AEE /* IssueViewModel.swift in Sources */,
 				769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */,
 				768181D12AB1EB8F0096A886 /* ContentView.swift in Sources */,
 				76D5F9E128D2606D009EBD80 /* JiraTokenValidator.swift in Sources */,

@@ -83,7 +83,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: username, password: jiraToken))
         }
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
@@ -108,7 +108,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: username, password: jiraToken))
         }
 
         AF.request(url, method: .get, parameters: nil, headers: headers)

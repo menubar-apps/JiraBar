@@ -31,6 +31,7 @@ struct Fields: Codable, Hashable {
     var project: Project
     var assignee: User?
     var creator: User?
+    var transitions: [Transition]?
     
     enum CodingKeys: String, CodingKey {
         case summary
@@ -39,6 +40,7 @@ struct Fields: Codable, Hashable {
         case project
         case assignee
         case creator
+        case transitions
     }
 }
 

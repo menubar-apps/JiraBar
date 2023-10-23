@@ -23,7 +23,7 @@ struct ContentView: View {
     @Default(.jqlTab2) var jqlTab2
     @Default(.jqlTab3) var jqlTab3
     
-    @State private var searchTerm: String = ""
+//    @State private var searchTerm: String = ""
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -94,18 +94,22 @@ struct ContentView: View {
                 })
                 .padding(20)
             } else {
-                List {
-                    let a = viewModel.getIssueForSelectedTab()
-                    ForEach(Array(a.keys.sorted()), id: \.self) { key in
-                        Section(header: Text("\(key) \(a[key]?.count ?? 0)")) {
-                            ForEach(a[key] ?? [], id: \.self) { issue in
-                                if searchTerm == "" || issue.fields.summary.contains(searchTerm) {
-                                    IssueView(viewModel: viewModel, issue: issue)
-                                        .listRowSeparator(.visible)
-                                }
-                            }
-                        }.collapsible(true)
+                List {                        
+                    let b = viewModel.getIssueForSelectedTab()
+                    ForEach(b, id:\.key) { issue in
+                        IssueView(viewModel: viewModel, issue: issue)
                     }
+//                    let a = viewModel.getIssueForSelectedTab()
+//                    ForEach(Array(a.keys.sorted()), id: \.self) { key in
+//                        Section(header: Text("\(key) \(a[key]?.count ?? 0)")) {
+//                            ForEach(a[key] ?? [], id: \.self) { issue in
+//                                if searchTerm == "" || issue.fields.summary.contains(searchTerm) {
+//                                    IssueView(viewModel: viewModel, issue: issue)
+//                                        .listRowSeparator(.visible)
+//                                }
+//                            }
+//                        }.collapsible(true)
+//                    }
                 }
                 .listStyle(.plain)
             }
@@ -132,12 +136,12 @@ struct ContentView: View {
                     .buttonStyle(.borderless)
                 }
 
-               TextField("Search...", text: $searchTerm)
+//               TextField("Search...", text: $searchTerm)
 //                    .padding(.vertical, 8)
 //                    .padding(.horizontal, 8)
 //                    .padding(.leading, 22)
-                    .cornerRadius(8)
-                    .textFieldStyle(.roundedBorder)
+//                    .cornerRadius(8)
+//                    .textFieldStyle(.roundedBorder)
 //                    .overlay(
 //                        Image(systemName: "plus.circle.fill")
 //                            .frame(maxWidth: .infinity, alignment: .leading)
