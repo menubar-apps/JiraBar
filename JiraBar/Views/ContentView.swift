@@ -9,22 +9,20 @@ import SwiftUI
 import Defaults
 
 struct ContentView: View {
-
+    
     var appDelegate: AppDelegate
     @StateObject var viewModel: ViewModel
     @Default(.activeTabs) var activeTabs
     @Default(.selectedTab) var selectedTab
-
+    
     @Environment(\.openURL) var openURL
-
+    
     @Default(.jiraHost) var jiraHost
-
+    
     @Default(.jqlTab1) var jqlTab1
     @Default(.jqlTab2) var jqlTab2
     @Default(.jqlTab3) var jqlTab3
     
-//    @State private var searchTerm: String = ""
-
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             
@@ -50,14 +48,14 @@ struct ContentView: View {
                 .cornerRadius(8)
                 .borderColor(.gray)
                 .padding(2)
-
+                
                 Menu {
                     Button(action: {
                         appDelegate.openPrefecencesWindow()
                     }) {
                         Label("Preferences...", systemImage: "books.vertical")
                     }
-
+                    
                     Button(action: {
                         appDelegate.openAboutWindow()
                     } ) {
@@ -99,58 +97,27 @@ struct ContentView: View {
                     ForEach(b, id:\.key) { issue in
                         IssueView(viewModel: viewModel, issue: issue)
                     }
-//                    let a = viewModel.getIssueForSelectedTab()
-//                    ForEach(Array(a.keys.sorted()), id: \.self) { key in
-//                        Section(header: Text("\(key) \(a[key]?.count ?? 0)")) {
-//                            ForEach(a[key] ?? [], id: \.self) { issue in
-//                                if searchTerm == "" || issue.fields.summary.contains(searchTerm) {
-//                                    IssueView(viewModel: viewModel, issue: issue)
-//                                        .listRowSeparator(.visible)
-//                                }
-//                            }
-//                        }.collapsible(true)
-//                    }
                 }
                 .listStyle(.plain)
             }
-
+            
             HStack {
-                HStack {
-//                    Button{
-//                        appDelegate.openPrefecencesWindow()
-//                    } label: {
-//                        HoverableLabelView(iconName: "gear")
-//                    }
-//                    .buttonStyle(.borderless)
-
-                    Button{
-                        openURL(URL(string: link)!)
-                    } label: {
-                        HoverableLabelView(iconName: "arrow.up.forward.app")
-                    }
-                    .buttonStyle(.borderless)
-
-                    Button{ appDelegate.openCreateNewIssue() } label: {
-                        HoverableLabelView(iconName: "plus.square")
-                    }
-                    .buttonStyle(.borderless)
+                Spacer()
+                Button{
+                    openURL(URL(string: link)!)
+                } label: {
+                    HoverableLabelView(iconName: "arrow.up.forward.app")
                 }
-
-//               TextField("Search...", text: $searchTerm)
-//                    .padding(.vertical, 8)
-//                    .padding(.horizontal, 8)
-//                    .padding(.leading, 22)
-//                    .cornerRadius(8)
-//                    .textFieldStyle(.roundedBorder)
-//                    .overlay(
-//                        Image(systemName: "plus.circle.fill")
-//                            .frame(maxWidth: .infinity, alignment: .leading)
-//                            .foregroundColor(.gray)
-//                            .padding(.leading, 8)
-//                    ).onSubmit {
-//                        self.todos.append(Todo(text: newTodo))
-//                        newTodo = ""
-//                    }
+                .buttonStyle(.borderless)
+                .help("Open search results")
+                
+                Button{
+                    openURL(URL(string: jiraHost + "/secure/CreateIssue!default.jspa")!)
+                } label: {
+                    HoverableLabelView(iconName: "plus.square")
+                }
+                .buttonStyle(.borderless)
+                .help("Create new issue")
             }
             .padding([.top, .bottom],4)
             .padding([.leading, .trailing], 8)
@@ -166,15 +133,15 @@ struct ContentView: View {
             if activeTabs.contains(.third) { viewModel.getIssuesForThirdTab() }
         }
     }
-
+    
     private var link: String {
         switch selectedTab {
         case .first:
-            return jiraHost + "/browse/" + (jqlTab1).addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+            return jiraHost + "/issues/?jql=" + (jqlTab1).addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
         case .second:
-            return jiraHost + "/browse/" + (jqlTab2).addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+            return jiraHost + "/issues/?jql=" + (jqlTab2).addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
         case .third:
-            return jiraHost + "/browse/" +  (jqlTab3).addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+            return jiraHost + "/issues/?jql=" +  (jqlTab3).addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
         }
     }
 }

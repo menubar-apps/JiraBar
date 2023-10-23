@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct IssueView: View {
     
@@ -13,7 +14,10 @@ struct IssueView: View {
     var issue: Issue
     @State private var isHovering = false
     @StateObject private var issueViewModel = IssueViewModel()
-    
+    @Environment(\.openURL) var openURL
+    @Default(.jiraHost) var jiraHost
+    let pasteboard = NSPasteboard.general
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
@@ -30,21 +34,30 @@ struct IssueView: View {
                 Spacer()
                 Menu {
                     Button(action: {
+                        pasteboard.clearContents()
+                        pasteboard.setString(jiraHost + "/browse/" + issue.key, forType: .string)
                     }) {
                         Text("Copy link")
                     }
                     Button(action: {
+                        pasteboard.clearContents()
+                        pasteboard.setString(issue.fields.summary, forType: .string)
                     }) {
                         Text("Copy title")
                     }
                     
                     Button(action: {
+                        pasteboard.clearContents()
+                        pasteboard.setString(issue.key, forType: .string)
                     } ) {
                         Text("Copy issue key")
                     }
                 } label: {
-                    Image(systemName: "square.on.square")
-                        .foregroundColor(.secondary)
+                    if isHovering {
+                        Image(systemName: "square.on.square")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 .menuStyle(.borderlessButton)
                 .menuIndicator(.hidden)
@@ -64,18 +77,18 @@ struct IssueView: View {
                 
                 Spacer()
                 
-                Menu {
-                    ForEach(issueViewModel.transitions, id: \.id) {transition in
-                        Button(action: {
-                        }) {
-                            Text(transition.name)
-                        }
-                    }
-                } label: {
+//                Menu {
+//                    ForEach(issueViewModel.transitions, id: \.id) {transition in
+//                        Button(action: {
+//                        }) {
+//                            Text(transition.name)
+//                        }
+//                    }
+//                } label: {
                     Text(issue.fields.status.name)
                         .font(.subheadline)
-                }
-                .menuStyle(BorderlessButtonMenuStyle())
+//                }
+//                .menuStyle(BorderlessButtonMenuStyle())
                 .padding([.leading, .trailing], 4)
                 .padding([.top, .bottom], 2)
                 .background(
@@ -85,7 +98,6 @@ struct IssueView: View {
                 .foregroundColor(.secondary)
                 
                 .frame(width: 80, alignment: .trailing)
-//                .padding()
             }
 //            .border(.red)
         }
@@ -95,9 +107,12 @@ struct IssueView: View {
             issueViewModel.getTransitionsForIssue(issueKey: issue.key)
         }
         .background(
-            RoundedRectangle(cornerRadius: 8, style: .continuous).fill(.primary.opacity(isHovering ? 0.1 : 0))
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(.primary.opacity(isHovering ? 0.1 : 0))
         )
-        
+        .onTapGesture{
+            openURL(URL(string: jiraHost + "/browse/" + issue.key)!)
+        }
     }
 }
 
