@@ -17,7 +17,7 @@ struct IssueView: View {
     @Environment(\.openURL) var openURL
     @Default(.jiraHost) var jiraHost
     let pasteboard = NSPasteboard.general
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
@@ -63,7 +63,7 @@ struct IssueView: View {
                 .menuIndicator(.hidden)
                 .frame(width: 20)
             }
-//            .border(.red)
+            //            .border(.red)
             
             HStack {
                 VStack(alignment: .leading) {
@@ -77,29 +77,29 @@ struct IssueView: View {
                 
                 Spacer()
                 
-//                Menu {
-//                    ForEach(issueViewModel.transitions, id: \.id) {transition in
-//                        Button(action: {
-//                        }) {
-//                            Text(transition.name)
-//                        }
-//                    }
-//                } label: {
-                    Text(issue.fields.status.name)
-                        .font(.subheadline)
-//                }
-//                .menuStyle(BorderlessButtonMenuStyle())
-                .padding([.leading, .trailing], 4)
-                .padding([.top, .bottom], 2)
-                .background(
-                    RoundedRectangle(cornerRadius: 50, style: .continuous)
-                        .stroke(Color.accentColor)
-                )
-                .foregroundColor(.secondary)
+                //                Menu {
+                //                    ForEach(issueViewModel.transitions, id: \.id) {transition in
+                //                        Button(action: {
+                //                        }) {
+                //                            Text(transition.name)
+                //                        }
+                //                    }
+                //                } label: {
+                Text(issue.fields.status.name)
+                    .font(.subheadline)
+                //                }
+                //                .menuStyle(BorderlessButtonMenuStyle())
+                    .padding([.leading, .trailing], 4)
+                    .padding([.top, .bottom], 2)
+                    .background(
+                        RoundedRectangle(cornerRadius: 50, style: .continuous)
+                            .stroke(Color.accentColor)
+                    )
+                    .foregroundColor(.secondary)
                 
-                .frame(width: 80, alignment: .trailing)
+                    .frame(width: 80, alignment: .trailing)
             }
-//            .border(.red)
+            //            .border(.red)
         }
         .padding()
         .whenHovered{ over in
@@ -116,13 +116,10 @@ struct IssueView: View {
     }
 }
 
-struct IssueView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        VStack (alignment: .leading) {
-            IssueView(viewModel: ViewModel(),issue: Issue(key: "ASD-1234", fields: Fields(summary: "Some task summary", status: IssueStatus(name: "some status"), issuetype: IssueType(name: "Bug"), project: Project(name: "Project Name"))))
-            IssueView(viewModel: ViewModel(),issue: Issue(key: "CNF-872", fields: Fields(summary: "Create something with long title", status: IssueStatus(name: "some status"), issuetype: IssueType(name: "Bug"), project: Project(name: "Project Name"))))
-        }.padding()
-            .frame(width: 400, height: 200)
-    }
+#Preview {
+    VStack (alignment: .leading) {
+        IssueView(viewModel: ViewModel(),issue: Issue(key: "ASD-1234", fields: Fields(summary: "Some task summary", status: IssueStatus(name: "some status"), issuetype: IssueType(name: "Bug"), project: Project(name: "Project Name"))))
+        IssueView(viewModel: ViewModel(),issue: Issue(key: "CNF-872", fields: Fields(summary: "Create something with long title", status: IssueStatus(name: "some status"), issuetype: IssueType(name: "Bug"), project: Project(name: "Project Name"))))
+    }.padding()
+        .frame(width: 400, height: 200)
 }

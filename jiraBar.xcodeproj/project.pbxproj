@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		76694E762AE48E6E00218AEE /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76694E752AE48E6E00218AEE /* IssueViewModel.swift */; };
+		76694E792AEC970C00218AEE /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 76694E782AEC970C00218AEE /* LaunchAtLogin */; };
 		768181D12AB1EB8F0096A886 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181D02AB1EB8F0096A886 /* ContentView.swift */; };
 		768181D32AB1EEB10096A886 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181D22AB1EEB10096A886 /* ViewModel.swift */; };
 		768181D52AB1FCD50096A886 /* IssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181D42AB1FCD50096A886 /* IssueView.swift */; };
@@ -72,6 +73,7 @@
 			files = (
 				769F4E652776430F00594911 /* Defaults in Frameworks */,
 				769F4E5F277567E200594911 /* Alamofire in Frameworks */,
+				76694E792AEC970C00218AEE /* LaunchAtLogin in Frameworks */,
 				76D5F9DF28D2158E009EBD80 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +189,7 @@
 				769F4E5E277567E200594911 /* Alamofire */,
 				769F4E642776430F00594911 /* Defaults */,
 				76D5F9DE28D2158E009EBD80 /* KeychainAccess */,
+				76694E782AEC970C00218AEE /* LaunchAtLogin */,
 			);
 			productName = JiraBar;
 			productReference = 769F4E4B2775640900594911 /* jiraBar.app */;
@@ -220,6 +223,7 @@
 				769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				769F4E632776430F00594911 /* XCRemoteSwiftPackageReference "Defaults" */,
 				76D5F9DD28D2158E009EBD80 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				76694E772AEC970C00218AEE /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = 769F4E4C2775640900594911 /* Products */;
 			projectDirPath = "";
@@ -487,6 +491,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		76694E772AEC970C00218AEE /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -514,6 +526,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		76694E782AEC970C00218AEE /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76694E772AEC970C00218AEE /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
+		};
 		769F4E5E277567E200594911 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 769F4E5D277567E200594911 /* XCRemoteSwiftPackageReference "Alamofire" */;

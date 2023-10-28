@@ -1,5 +1,6 @@
 import SwiftUI
 import Defaults
+import LaunchAtLogin
 
 struct PreferencesView: View {
     @Default(.username) var username
@@ -9,11 +10,11 @@ struct PreferencesView: View {
     @FromKeychain(.jiraToken) var jiraToken
     
     @StateObject private var jiraTokenValidator = JiraTokenValidator()
-    
+    @State private var selection = 3
+
     var body: some View {
-        
-        
-        TabView {
+
+        TabView (selection: $selection) {
             Form {
                 TextField("Username:", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -40,25 +41,35 @@ struct PreferencesView: View {
                     jiraTokenValidator.validate()
                 }
                 .tabItem{Text("Authentication")}
+                .tag(1)
             
             TabsPrefView()
+                .tag(2)
             
-            Form{
-                TextField("Max Results:", text: $maxResults)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 120)
+            VStack (alignment: .leading){
+                HStack(alignment: .center) {
+                    Text("Max Number Results:").frame(width: 130, alignment: .leading)
+                    TextField("", text: $maxResults)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .disableAutocorrection(true)
+                        .textContentType(.password)
+                        .frame(width: 40)
+                }
+                HStack(alignment: .center) {
+                    Text("Launch at login:").frame(width: 130, alignment: .leading)
+                    LaunchAtLogin.Toggle{Text("")}
+                }
             }
             .padding()
             .frame(maxWidth: .infinity)
             .tabItem{Text("General")}
+            .tag(3)
         }
         .padding()
         .frame(width: 500)
     }
 }
 
-struct PreferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        PreferencesView()
-    }
+#Preview {
+    PreferencesView()
 }

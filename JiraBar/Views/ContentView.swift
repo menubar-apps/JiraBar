@@ -92,7 +92,7 @@ struct ContentView: View {
                 })
                 .padding(20)
             } else {
-                List {                        
+                List {
                     let b = viewModel.getIssueForSelectedTab()
                     ForEach(b, id:\.key) { issue in
                         IssueView(viewModel: viewModel, issue: issue)
