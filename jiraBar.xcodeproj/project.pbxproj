@@ -17,7 +17,6 @@
 		768181DD2ABCBCEF0096A886 /* PickerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181DC2ABCBCEF0096A886 /* PickerTabView.swift */; };
 		768181E12ABF31B80096A886 /* HoverableLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181E02ABF31B80096A886 /* HoverableLabelView.swift */; };
 		768181E52AC95C2F0096A886 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181E42AC95C2F0096A886 /* ViewExtensions.swift */; };
-		768181E72AC9A87A0096A886 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768181E62AC9A87A0096A886 /* TopBarView.swift */; };
 		769F4E4F2775640900594911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E4E2775640900594911 /* AppDelegate.swift */; };
 		769F4E532775640A00594911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E522775640A00594911 /* Assets.xcassets */; };
 		769F4E562775640A00594911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E542775640A00594911 /* Main.storyboard */; };
@@ -47,7 +46,6 @@
 		768181DC2ABCBCEF0096A886 /* PickerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTabView.swift; sourceTree = "<group>"; };
 		768181E02ABF31B80096A886 /* HoverableLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverableLabelView.swift; sourceTree = "<group>"; };
 		768181E42AC95C2F0096A886 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		768181E62AC9A87A0096A886 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		769F4E4B2775640900594911 /* jiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		769F4E4E2775640900594911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		769F4E522775640A00594911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				769F4E74277795E700594911 /* AboutView.swift */,
 				768181D02AB1EB8F0096A886 /* ContentView.swift */,
 				768181D42AB1FCD50096A886 /* IssueView.swift */,
-				768181E62AC9A87A0096A886 /* TopBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -255,7 +252,6 @@
 				769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */,
 				768181DB2ABCBC720096A886 /* PickerPlus.swift in Sources */,
 				769F4E682776442200594911 /* JiraDtos.swift in Sources */,
-				768181E72AC9A87A0096A886 /* TopBarView.swift in Sources */,
 				769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */,
 				769F4E75277795E700594911 /* AboutView.swift in Sources */,
 				76D5F9DC28D212E5009EBD80 /* Keychain.swift in Sources */,

@@ -46,7 +46,7 @@ struct PreferencesView: View {
             TabsPrefView()
                 .tag(2)
             
-            VStack (alignment: .leading){
+            VStack (alignment: .leading){		
                 HStack(alignment: .center) {
                     Text("Max Number Results:").frame(width: 130, alignment: .leading)
                     TextField("", text: $maxResults)
