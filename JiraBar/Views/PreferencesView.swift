@@ -2,6 +2,7 @@ import SwiftUI
 import Defaults
 
 struct PreferencesView: View {
+    @Default(.jiraUsername) var jiraUsername
     @Default(.jiraHost) var jiraHost
     @Default(.jql) var jql
     @Default(.refreshRate) var refreshRate
@@ -17,9 +18,11 @@ struct PreferencesView: View {
         HStack {
                 Spacer()
                 Form {
-                    TextField("Jira Host:", text: $jiraHost)
+                    TextField("Username:", text: $jiraUsername)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    SecureField("Jira Token:", text: $jiraToken)
+                    TextField("Host:", text: $jiraHost)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    SecureField("Token:", text: $jiraToken)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .overlay(
                             Image(systemName: jiraTokenValidator.iconName).foregroundColor(jiraTokenValidator.iconColor)
@@ -64,8 +67,6 @@ struct PreferencesView: View {
     }
 }
 
-struct PreferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        PreferencesView()
-    }
+#Preview {
+    PreferencesView()
 }
