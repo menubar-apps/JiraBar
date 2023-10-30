@@ -7,6 +7,7 @@ import KeychainAccess
 
 public class JiraClient {
     @Default(.jiraHost) var jiraHost
+    @Default(.jiraUsername) var jiraUsername
     @Default(.jql) var jql
     @Default(.maxResults) var maxResults
     
@@ -24,7 +25,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
         }
         
         AF.request(url, method: .get, parameters: parameters, headers: headers)
@@ -49,7 +50,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
         }
 
         AF.request(url, method: .get, parameters: nil, headers: headers)
@@ -80,7 +81,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
         }
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
@@ -107,7 +108,7 @@ public class JiraClient {
         ]
         
         if !jiraToken.isEmpty {
-            headers.add(.authorization(bearerToken: jiraToken))
+            headers.add(.authorization(username: jiraUsername, password: jiraToken))
         }
 
         AF.request(url, method: .get, parameters: nil, headers: headers)
