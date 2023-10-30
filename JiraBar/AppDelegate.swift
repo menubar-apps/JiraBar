@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let config = NSImage.SymbolConfiguration(pointSize: 24, weight: .regular)
         unknownPersonAvatar = NSImage(systemSymbolName: "person.crop.circle.badge.questionmark", accessibilityDescription: nil)!.withSymbolConfiguration(config)!
-
+        checkForUpdates()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -72,11 +72,11 @@ extension AppDelegate {
                 self.statusBarItem.button?.title = String(issues.count)
                 let issuesByStatus = Dictionary(grouping: issues) { $0.fields.status.name }
                     .sorted { $0.key < $1.key }
-
+                
                 for (status, issuess) in issuesByStatus {
                     self.menu.addItem(.separator())
                     self.menu.addItem(withTitle: status, action: nil, keyEquivalent: "")
-                
+                    
                     for issue in issuess {
                         let issueItem = NSMenuItem(title: "", action: #selector(self.openLink), keyEquivalent: "")
                         
@@ -90,19 +90,19 @@ extension AppDelegate {
                             .appendString(string: issue.fields.assignee?.displayName ?? "Unassign", color: "#888888")
                             .appendSeparator()
                             .appendString(string: issue.fields.issuetype.name, color: "#888888")
-
+                        
                         
                         issueItem.attributedTitle = issueItemTitle
                         if issue.fields.summary.count > 50 {
                             issueItem.toolTip = issue.fields.summary
                         }
                         issueItem.representedObject = URL(string: "\(self.jiraHost)/browse/\(issue.key)")
-                                                
+                        
                         self.jiraClient.getTransitionsByIssueKey(issueKey: issue.key) { transitions in
                             if !transitions.isEmpty {
                                 let transitionsMenu = NSMenu()
                                 issueItem.submenu = transitionsMenu
-
+                                
                                 for transition in transitions {
                                     let transitionItem = NSMenuItem(title: transition.name, action: #selector(self.transitionIssue), keyEquivalent: "")
                                     transitionItem.representedObject = [issue.key, transition.id]
@@ -131,7 +131,7 @@ extension AppDelegate {
             let createNewItem = NSMenuItem(title: "Create issue", action: #selector(self.openCreateNewIssue), keyEquivalent: "")
             createNewItem.image = NSImage(systemSymbolName: "plus", accessibilityDescription: nil)
             self.menu.addItem(createNewItem)
-
+            
             self.menu.addItem(.separator())
             self.menu.addItem(withTitle: "Preferences...", action: #selector(self.openPrefecencesWindow), keyEquivalent: "")
             self.menu.addItem(withTitle: "About JiraBar", action: #selector(self.openAboutWindow), keyEquivalent: "")
@@ -149,7 +149,7 @@ extension AppDelegate {
             self.refreshMenu()
         }
     }
-
+    
     @objc
     func openSearchResults() {
         let encodedPath = jql.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
@@ -184,7 +184,7 @@ extension AppDelegate {
         preferencesWindow.contentView = NSHostingView(rootView: contentView)
         preferencesWindow.makeKeyAndOrderFront(nil)
         preferencesWindow.styleMask.remove(.resizable)
-
+        
         // allow the preference window can be focused automatically when opened
         NSApplication.shared.activate(ignoringOtherApps: true)
         
@@ -213,7 +213,7 @@ extension AppDelegate {
         aboutWindow.contentView = NSHostingView(rootView: contentView)
         aboutWindow.makeKeyAndOrderFront(nil)
         aboutWindow.styleMask.remove(.resizable)
-
+        
         // allow the preference window can be focused automatically when opened
         NSApplication.shared.activate(ignoringOtherApps: true)
         
@@ -244,6 +244,21 @@ extension AppDelegate {
                     repeats: true
                 )
                 timer?.fire()
+            }
+        }
+    }
+    
+    @objc
+    func checkForUpdates() {
+        let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        GithubClient().getLatestRelease { latestRelease in
+            if let latestRelease = latestRelease {
+                let versionComparison = currentVersion.compare(latestRelease.name.replacingOccurrences(of: "v", with: ""), options: .numeric)
+                if versionComparison == .orderedAscending {
+                    let newVersionItem = NSMenuItem(title: "New version available", action: #selector(self.openLink), keyEquivalent: "")
+                    newVersionItem.representedObject = URL(string: latestRelease.htmlUrl)
+                    self.menu.addItem(newVersionItem)
+                }
             }
         }
     }
