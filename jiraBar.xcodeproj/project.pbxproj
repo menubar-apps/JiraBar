@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		768D68872AEF367F004261DB /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D68862AEF367F004261DB /* GithubClient.swift */; };
+		768D68892AEF3746004261DB /* GithubDtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D68882AEF3746004261DB /* GithubDtos.swift */; };
 		769F4E4F2775640900594911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E4E2775640900594911 /* AppDelegate.swift */; };
 		769F4E532775640A00594911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E522775640A00594911 /* Assets.xcassets */; };
 		769F4E562775640A00594911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E542775640A00594911 /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		768D68862AEF367F004261DB /* GithubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
+		768D68882AEF3746004261DB /* GithubDtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDtos.swift; sourceTree = "<group>"; };
 		769F4E4B2775640900594911 /* jiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		769F4E4E2775640900594911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		769F4E522775640A00594911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		768D68852AEF3666004261DB /* Github */ = {
+			isa = PBXGroup;
+			children = (
+				768D68862AEF367F004261DB /* GithubClient.swift */,
+				768D68882AEF3746004261DB /* GithubDtos.swift */,
+			);
+			path = Github;
+			sourceTree = "<group>";
+		};
 		769F4E422775640900594911 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +93,7 @@
 			children = (
 				769F4E73277795D700594911 /* Views */,
 				769F4E6927764BFE00594911 /* Extensions */,
+				768D68852AEF3666004261DB /* Github */,
 				769F4E60277569D900594911 /* Jira */,
 				769F4E4E2775640900594911 /* AppDelegate.swift */,
 				769F4E522775640A00594911 /* Assets.xcassets */,
@@ -213,6 +227,8 @@
 				769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */,
 				76D5F9E128D2606D009EBD80 /* JiraTokenValidator.swift in Sources */,
 				769F4E62277569E700594911 /* JiraClient.swift in Sources */,
+				768D68892AEF3746004261DB /* GithubDtos.swift in Sources */,
+				768D68872AEF367F004261DB /* GithubClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
