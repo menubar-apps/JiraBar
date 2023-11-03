@@ -35,9 +35,7 @@ struct PreferencesView: View {
                 
                 Text("Jira Cloud: generate an [API Token](https://id.atlassian.com/manage/api-tokens)")
                     .font(.footnote)
-                Text("Jira Server: use your password as a token")
-                    .font(.footnote)
-                
+               
                 Divider()
                 
                 TextField("JQL Query:", text: $jql)
