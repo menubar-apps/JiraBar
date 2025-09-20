@@ -3,7 +3,7 @@ import Defaults
 
 struct PreferencesView: View {
     @Default(.jiraUsername) var jiraUsername
-    @Default(.jiraHost) var jiraHost
+    @Default(.orgName) var orgName
     @Default(.jql) var jql
     @Default(.refreshRate) var refreshRate
     @Default(.maxResults) var maxResults
@@ -12,6 +12,8 @@ struct PreferencesView: View {
     
     @StateObject private var jiraTokenValidator = JiraTokenValidator()
     
+    @State private var orgNameState: String = ""
+
     var body: some View {
         
         Spacer()
@@ -20,8 +22,28 @@ struct PreferencesView: View {
             Form {
                 TextField("Username:", text: $jiraUsername)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                TextField("Host:", text: $jiraHost)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                LabeledContent("Org Name:") {
+                    HStack {
+                        Text("https://")
+                            .foregroundColor(.secondary)
+                        
+                        DebounceTextField(label: "", value: $orgNameState) { value in
+                            orgNameState = orgNameState.trimmingCharacters(in: .whitespaces)
+                            orgName = orgNameState
+                            jiraTokenValidator.validate()
+                        }
+                        .labelsHidden()
+                        .frame(width: 150)
+                        .onAppear {
+                            orgNameState = orgName
+                        }
+                        
+                        Text(".atlassian.net")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
                 SecureField("Token:", text: $jiraToken)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .overlay(

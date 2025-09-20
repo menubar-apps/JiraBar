@@ -6,6 +6,7 @@ import KeychainAccess
 
 
 public class JiraClient {
+    @Default(.orgName) var orgName
     @Default(.jiraHost) var jiraHost
     @Default(.jiraUsername) var jiraUsername
     @Default(.jql) var jql
@@ -14,7 +15,7 @@ public class JiraClient {
     @FromKeychain(.jiraToken) var jiraToken
     
     func getIssuesByJql(completion:@escaping ((JiraResponse) -> Void)) -> Void {
-        let url = "\(jiraHost)/rest/api/3/search/jql"
+        let url = "https://\(orgName).atlassian.net/rest/api/3/search/jql"
         let parameters = [
             "jql": jql,
             "fields":"id,assignee,summary,status,issuetype,project",
@@ -43,7 +44,7 @@ public class JiraClient {
     }
     
     func getTransitionsByIssueKey(issueKey: String, completion: @escaping (([Transition]) -> Void)) -> Void {
-        let url = "\(jiraHost)/rest/api/2/issue/\(issueKey)/transitions"
+        let url = "https://\(orgName).atlassian.net/rest/api/2/issue/\(issueKey)/transitions"
         
         var headers: HTTPHeaders = [
             .accept("application/json")
@@ -68,7 +69,7 @@ public class JiraClient {
     }
     
     func transitionIssue(issueKey: String, to: String, completion: @escaping (() -> Void)) -> Void {
-        let url = "\(jiraHost)/rest/api/2/issue/\(issueKey)/transitions"
+        let url = "https://\(orgName).atlassian.net/rest/api/2/issue/\(issueKey)/transitions"
         let parameters = [
             "transition": [
                 "id": to
@@ -100,8 +101,8 @@ public class JiraClient {
             }
     }
     
-    func getMyself(completion: @escaping(User?) -> Void) {
-        let url = "\(jiraHost)/rest/api/2/myself"
+    func getMyself(completion: @escaping(Bool) -> Void) {
+        let url = "https://\(orgName).atlassian.net/rest/api/3/myself"
         
         var headers: HTTPHeaders = [
             .accept("application/json")
@@ -113,12 +114,12 @@ public class JiraClient {
 
         AF.request(url, method: .get, parameters: nil, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: User.self) { response in
+            .response { response in
                 switch response.result {
-                case .success(let user):
-                    completion(user)
+                case .success(_):
+                    completion(true)
                 case .failure(let error):
-                    completion(nil)
+                    completion(false)
                     print(error)
                     sendNotification(body: error.localizedDescription)
                 }

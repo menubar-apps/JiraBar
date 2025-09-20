@@ -37,8 +37,8 @@ class JiraTokenValidator: ObservableObject {
     func validate() {
         setLoading()
         
-        JiraClient().getMyself() { myself in
-            if myself != nil {
+        JiraClient().getMyself() { result in
+            if result {
                 self.setValid()
             }
             else {
