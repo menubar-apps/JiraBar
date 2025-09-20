@@ -8,7 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @Default(.refreshRate) var refreshRate
     @Default(.jql) var jql
-    @Default(.jiraHost) var jiraHost
+    @Default(.orgName) var orgName
 
     let jiraClient = JiraClient()
     
@@ -96,13 +96,14 @@ extension AppDelegate {
                         if issue.fields.summary.count > 50 {
                             issueItem.toolTip = issue.fields.summary
                         }
-                        issueItem.representedObject = URL(string: "\(self.jiraHost)/browse/\(issue.key)")
+                        issueItem.representedObject = URL(string: "https://\(self.orgName).atlassian.net/browse/\(issue.key)")
                         
                         self.jiraClient.getTransitionsByIssueKey(issueKey: issue.key) { transitions in
                             if !transitions.isEmpty {
                                 let transitionsMenu = NSMenu()
                                 issueItem.submenu = transitionsMenu
-                                
+                                let header = NSMenuItem(title: "Transition to...", action: nil, keyEquivalent: "")
+                                transitionsMenu.addItem(header)
                                 for transition in transitions {
                                     let transitionItem = NSMenuItem(title: transition.name, action: #selector(self.transitionIssue), keyEquivalent: "")
                                     transitionItem.representedObject = [issue.key, transition.id]
@@ -153,12 +154,12 @@ extension AppDelegate {
     @objc
     func openSearchResults() {
         let encodedPath = jql.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
-        NSWorkspace.shared.open(URL(string: jiraHost + "/issues?jql=" + encodedPath!)!)
+        NSWorkspace.shared.open(URL(string: "https://\(orgName).atlassian.net/issues?jql=" + encodedPath!)!)
     }
     
     @objc
     func openCreateNewIssue() {
-        NSWorkspace.shared.open(URL(string: jiraHost + "/secure/CreateIssue!default.jspa")!)
+        NSWorkspace.shared.open(URL(string: "https://\(orgName).atlassian.net/secure/CreateIssue!default.jspa")!)
     }
     
     @objc

@@ -4,6 +4,7 @@ import Defaults
 extension Defaults.Keys {
     static let jiraUsername = Key<String>("jiraUsername", default: "")
     
+    static let orgName = Key<String>("orgName", default: "")
     static let jiraHost = Key<String>("jiraHost", default: "https://issues.apache.org/jira")
     static let jql = Key<String>("jql", default: "")
     

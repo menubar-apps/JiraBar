@@ -3,51 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		768D68872AEF367F004261DB /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D68862AEF367F004261DB /* GithubClient.swift */; };
-		768D68892AEF3746004261DB /* GithubDtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D68882AEF3746004261DB /* GithubDtos.swift */; };
 		769F4E4F2775640900594911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E4E2775640900594911 /* AppDelegate.swift */; };
 		769F4E532775640A00594911 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E522775640A00594911 /* Assets.xcassets */; };
 		769F4E562775640A00594911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 769F4E542775640A00594911 /* Main.storyboard */; };
 		769F4E5F277567E200594911 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 769F4E5E277567E200594911 /* Alamofire */; };
-		769F4E62277569E700594911 /* JiraClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E61277569E700594911 /* JiraClient.swift */; };
 		769F4E652776430F00594911 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 769F4E642776430F00594911 /* Defaults */; };
-		769F4E682776442200594911 /* JiraDtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E672776442200594911 /* JiraDtos.swift */; };
-		769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E6A27764C3000594911 /* NSMutableAttributedString.swift */; };
-		769F4E6D27764C6900594911 /* NSColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E6C27764C6900594911 /* NSColorExtensions.swift */; };
-		769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E6E27764CF300594911 /* NSImageExtensions.swift */; };
-		769F4E712776AE4700594911 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E702776AE4700594911 /* StringExtensions.swift */; };
-		769F4E75277795E700594911 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E74277795E700594911 /* AboutView.swift */; };
-		769F4E772777993400594911 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E762777993400594911 /* PreferencesView.swift */; };
-		769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769F4E7827779E8000594911 /* DefaultsExtensions.swift */; };
 		76D5F9DC28D212E5009EBD80 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D5F9DB28D212E5009EBD80 /* Keychain.swift */; };
 		76D5F9DF28D2158E009EBD80 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 76D5F9DE28D2158E009EBD80 /* KeychainAccess */; };
-		76D5F9E128D2606D009EBD80 /* JiraTokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D5F9E028D2606D009EBD80 /* JiraTokenValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		768D68862AEF367F004261DB /* GithubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
-		768D68882AEF3746004261DB /* GithubDtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDtos.swift; sourceTree = "<group>"; };
 		769F4E4B2775640900594911 /* jiraBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jiraBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		769F4E4E2775640900594911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		769F4E522775640A00594911 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		769F4E552775640A00594911 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		769F4E572775640A00594911 /* JiraBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiraBar.entitlements; sourceTree = "<group>"; };
-		769F4E61277569E700594911 /* JiraClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraClient.swift; sourceTree = "<group>"; };
-		769F4E672776442200594911 /* JiraDtos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraDtos.swift; sourceTree = "<group>"; };
-		769F4E6A27764C3000594911 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
-		769F4E6C27764C6900594911 /* NSColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColorExtensions.swift; sourceTree = "<group>"; };
-		769F4E6E27764CF300594911 /* NSImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageExtensions.swift; sourceTree = "<group>"; };
-		769F4E702776AE4700594911 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		769F4E74277795E700594911 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		769F4E762777993400594911 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
-		769F4E7827779E8000594911 /* DefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsExtensions.swift; sourceTree = "<group>"; };
 		76D5F9DB28D212E5009EBD80 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
-		76D5F9E028D2606D009EBD80 /* JiraTokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraTokenValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		76CA6CFB2E7EE36100B8C9A8 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		76CA6D042E7EE36500B8C9A8 /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
+		76CA6D0C2E7EE36900B8C9A8 /* Github */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Github; sourceTree = "<group>"; };
+		76CA6D122E7EE36C00B8C9A8 /* Jira */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Jira; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		769F4E482775640900594911 /* Frameworks */ = {
@@ -63,15 +46,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		768D68852AEF3666004261DB /* Github */ = {
-			isa = PBXGroup;
-			children = (
-				768D68862AEF367F004261DB /* GithubClient.swift */,
-				768D68882AEF3746004261DB /* GithubDtos.swift */,
-			);
-			path = Github;
-			sourceTree = "<group>";
-		};
 		769F4E422775640900594911 = {
 			isa = PBXGroup;
 			children = (
@@ -91,10 +65,10 @@
 		769F4E4D2775640900594911 /* JiraBar */ = {
 			isa = PBXGroup;
 			children = (
-				769F4E73277795D700594911 /* Views */,
-				769F4E6927764BFE00594911 /* Extensions */,
-				768D68852AEF3666004261DB /* Github */,
-				769F4E60277569D900594911 /* Jira */,
+				76CA6CFB2E7EE36100B8C9A8 /* Views */,
+				76CA6D042E7EE36500B8C9A8 /* Extensions */,
+				76CA6D0C2E7EE36900B8C9A8 /* Github */,
+				76CA6D122E7EE36C00B8C9A8 /* Jira */,
 				769F4E4E2775640900594911 /* AppDelegate.swift */,
 				769F4E522775640A00594911 /* Assets.xcassets */,
 				769F4E542775640A00594911 /* Main.storyboard */,
@@ -102,37 +76,6 @@
 				76D5F9DB28D212E5009EBD80 /* Keychain.swift */,
 			);
 			path = JiraBar;
-			sourceTree = "<group>";
-		};
-		769F4E60277569D900594911 /* Jira */ = {
-			isa = PBXGroup;
-			children = (
-				769F4E61277569E700594911 /* JiraClient.swift */,
-				769F4E672776442200594911 /* JiraDtos.swift */,
-				76D5F9E028D2606D009EBD80 /* JiraTokenValidator.swift */,
-			);
-			path = Jira;
-			sourceTree = "<group>";
-		};
-		769F4E6927764BFE00594911 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				769F4E6A27764C3000594911 /* NSMutableAttributedString.swift */,
-				769F4E6C27764C6900594911 /* NSColorExtensions.swift */,
-				769F4E6E27764CF300594911 /* NSImageExtensions.swift */,
-				769F4E702776AE4700594911 /* StringExtensions.swift */,
-				769F4E7827779E8000594911 /* DefaultsExtensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		769F4E73277795D700594911 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				769F4E74277795E700594911 /* AboutView.swift */,
-				769F4E762777993400594911 /* PreferencesView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +92,12 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				76CA6CFB2E7EE36100B8C9A8 /* Views */,
+				76CA6D042E7EE36500B8C9A8 /* Extensions */,
+				76CA6D0C2E7EE36900B8C9A8 /* Github */,
+				76CA6D122E7EE36C00B8C9A8 /* Jira */,
 			);
 			name = jiraBar;
 			packageProductDependencies = (
@@ -215,20 +164,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				769F4E712776AE4700594911 /* StringExtensions.swift in Sources */,
-				769F4E7927779E8000594911 /* DefaultsExtensions.swift in Sources */,
-				769F4E682776442200594911 /* JiraDtos.swift in Sources */,
-				769F4E6F27764CF300594911 /* NSImageExtensions.swift in Sources */,
-				769F4E75277795E700594911 /* AboutView.swift in Sources */,
 				76D5F9DC28D212E5009EBD80 /* Keychain.swift in Sources */,
-				769F4E772777993400594911 /* PreferencesView.swift in Sources */,
-				769F4E6D27764C6900594911 /* NSColorExtensions.swift in Sources */,
 				769F4E4F2775640900594911 /* AppDelegate.swift in Sources */,
-				769F4E6B27764C3000594911 /* NSMutableAttributedString.swift in Sources */,
-				76D5F9E128D2606D009EBD80 /* JiraTokenValidator.swift in Sources */,
-				769F4E62277569E700594911 /* JiraClient.swift in Sources */,
-				768D68892AEF3746004261DB /* GithubDtos.swift in Sources */,
-				768D68872AEF367F004261DB /* GithubClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,10 +306,11 @@
 				CODE_SIGN_ENTITLEMENTS = JiraBar/JiraBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = UV3HUS49VJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = JiraBar;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -381,6 +319,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = debug.com.pavelmakhov.JiraBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -397,10 +336,11 @@
 				CODE_SIGN_ENTITLEMENTS = JiraBar/JiraBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = UV3HUS49VJ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = JiraBar;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -409,6 +349,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pavelmakhov.JiraBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";

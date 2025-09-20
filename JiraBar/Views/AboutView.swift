@@ -32,18 +32,18 @@ struct AboutView: View {
                 .frame(width: 150)
             }
 
-            Button(action: {
-                openURL(URL(string: "https://www.buymeacoffee.com/streetturtle")!)
-            }) {
-                HStack {
-                    Image("bmc-logo-no-background")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.top, 2)
-                    Text("Buy me a coffee")
-                }
-                .frame(width: 150)
-            }
+           Button(action: {
+               openURL(URL(string: "https://www.buymeacoffee.com/streetturtle")!)
+           }) {
+               HStack {
+                   Image("bmc-logo-no-background")
+                       .resizable()
+                       .scaledToFit()
+                       .padding(.top, 2)
+                   Text("Buy me a coffee")
+               }
+               .frame(width: 150)
+           }
         }
         .padding()
     }
