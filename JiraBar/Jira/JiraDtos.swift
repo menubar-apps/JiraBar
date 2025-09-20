@@ -3,11 +3,11 @@ import Foundation
 // MARK: issues
 //
 struct JiraResponse: Codable {
-    var total: Int
+    var isLast: Bool
     var issues: [Issue]?
     
     enum CodingKeys: String, CodingKey {
-        case total
+        case isLast
         case issues
     }
 }

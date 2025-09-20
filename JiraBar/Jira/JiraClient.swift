@@ -14,7 +14,7 @@ public class JiraClient {
     @FromKeychain(.jiraToken) var jiraToken
     
     func getIssuesByJql(completion:@escaping ((JiraResponse) -> Void)) -> Void {
-        let url = "\(jiraHost)/rest/api/2/search"
+        let url = "\(jiraHost)/rest/api/3/search/jql"
         let parameters = [
             "jql": jql,
             "fields":"id,assignee,summary,status,issuetype,project",
@@ -36,7 +36,7 @@ public class JiraClient {
                     completion(response)
                 case .failure(let error):
                     print("\(url):  \(error)")
-                    completion(JiraResponse(total: 0))
+                    completion(JiraResponse(isLast: true))
                     sendNotification(body: error.localizedDescription)
                 }
             }
