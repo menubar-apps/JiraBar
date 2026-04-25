@@ -3,13 +3,9 @@ import Foundation
 // MARK: issues
 //
 struct JiraResponse: Codable {
-    var isLast: Bool
+    /// Present in Jira Cloud responses only; absent in Server/Data Center.
+    var isLast: Bool?
     var issues: [Issue]?
-    
-    enum CodingKeys: String, CodingKey {
-        case isLast
-        case issues
-    }
 }
 
 struct Issue: Codable {

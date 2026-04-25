@@ -2,6 +2,8 @@ import Cocoa
 import SwiftUI
 import Foundation
 import Defaults
+import KeychainAccess
+
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -9,8 +11,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @Default(.refreshRate) var refreshRate
     @Default(.jql) var jql
     @Default(.orgName) var orgName
+    @Default(.instanceType) var instanceType
+    @Default(.jiraHost) var jiraHost
 
     let jiraClient = JiraClient()
+
+    /// Base web URL for opening pages in the browser — mirrors JiraClient.baseUrl.
+    private var baseUrl: String {
+        switch instanceType {
+        case .cloud:  return "https://\(orgName).atlassian.net"
+        case .server: return jiraHost.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        }
+    }
     
     var statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let menu: NSMenu = NSMenu()
@@ -23,6 +35,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var unknownPersonAvatar: NSImage!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+
+        // Migrate stale jiraHost default from previous app versions.
+        // The old default was "https://issues.apache.org/jira"; reset it to the
+        // current placeholder so the Server preferences field doesn't fire DNS
+        // requests against a URL the user never intentionally configured.
+        if Defaults[.jiraHost] == "https://issues.apache.org/jira" {
+            Defaults[.jiraHost] = "https://jira.example.com"
+        }
+
+        // Migrate server token from the old shared keychain key.
+        // Before the cloud/server token split, both instance types stored credentials
+        // under "jiraToken". If the user is in server mode and "jiraServerToken" is
+        // still empty, copy whatever is in "jiraToken" across so they don't need to
+        // re-enter their password.
+        if Defaults[.instanceType] == .server,
+           let existing = try? Keychain().get("jiraToken"), !existing.isEmpty {
+            let serverToken: String? = (try? Keychain().get("jiraServerToken")) ?? nil
+            if serverToken == nil || serverToken!.isEmpty {
+                try? Keychain().set(existing, key: "jiraServerToken")
+            }
+        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.windowClosed), name: NSWindow.willCloseNotification, object: nil)
         guard let statusButton = statusBarItem.button else { return }
@@ -96,7 +129,7 @@ extension AppDelegate {
                         if issue.fields.summary.count > 50 {
                             issueItem.toolTip = issue.fields.summary
                         }
-                        issueItem.representedObject = URL(string: "https://\(self.orgName).atlassian.net/browse/\(issue.key)")
+                        issueItem.representedObject = URL(string: "\(self.baseUrl)/browse/\(issue.key)")
                         
                         self.jiraClient.getTransitionsByIssueKey(issueKey: issue.key) { transitions in
                             if !transitions.isEmpty {
@@ -154,12 +187,12 @@ extension AppDelegate {
     @objc
     func openSearchResults() {
         let encodedPath = jql.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
-        NSWorkspace.shared.open(URL(string: "https://\(orgName).atlassian.net/issues?jql=" + encodedPath!)!)
+        NSWorkspace.shared.open(URL(string: "\(baseUrl)/issues?jql=" + encodedPath!)!)
     }
     
     @objc
     func openCreateNewIssue() {
-        NSWorkspace.shared.open(URL(string: "https://\(orgName).atlassian.net/secure/CreateIssue!default.jspa")!)
+        NSWorkspace.shared.open(URL(string: "\(baseUrl)/secure/CreateIssue!default.jspa")!)
     }
     
     @objc
