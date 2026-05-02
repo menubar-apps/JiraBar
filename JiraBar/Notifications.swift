@@ -10,7 +10,7 @@ import UserNotifications
 
 func sendNotification(body: String = "") {
   let content = UNMutableNotificationContent()
-  content.title = "PullBar"
+  content.title = "JiraBar"
 
   if body.count > 0 {
     content.body = body
