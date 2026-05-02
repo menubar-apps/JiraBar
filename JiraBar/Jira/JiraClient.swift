@@ -7,9 +7,11 @@ import KeychainAccess
 
 public class JiraClient {
     @Default(.instanceType) var instanceType
+    @Default(.serverAuthType) var serverAuthType
     @Default(.orgName) var orgName
     @Default(.jiraHost) var jiraHost
     @Default(.jiraUsername) var jiraUsername
+    @Default(.jiraServerUsername) var jiraServerUsername
     @Default(.jql) var jql
     @Default(.maxResults) var maxResults
     
@@ -40,6 +42,13 @@ public class JiraClient {
 
     // MARK: - Auth header
 
+    private var activeUsername: String {
+        switch instanceType {
+        case .cloud:  return jiraUsername
+        case .server: return jiraServerUsername
+        }
+    }
+
     private var activeToken: String {
         switch instanceType {
         case .cloud:  return jiraToken
@@ -49,8 +58,25 @@ public class JiraClient {
 
     private func authHeaders() -> HTTPHeaders {
         var headers: HTTPHeaders = [.accept("application/json")]
-        if !activeToken.isEmpty {
-            headers.add(.authorization(username: jiraUsername, password: activeToken))
+        switch instanceType {
+        case .cloud:
+            // Cloud always uses Basic auth: email + API token
+            if !activeToken.isEmpty {
+                headers.add(.authorization(username: activeUsername, password: activeToken))
+            }
+        case .server:
+            switch serverAuthType {
+            case .basic:
+                // Older Jira Server (pre-8.14): Basic auth with username + password
+                if !activeToken.isEmpty {
+                    headers.add(.authorization(username: activeUsername, password: activeToken))
+                }
+            case .pat:
+                // Jira Server 8.14+ / Data Center: Bearer token (PAT)
+                if !activeToken.isEmpty {
+                    headers.add(.authorization(bearerToken: activeToken))
+                }
+            }
         }
         return headers
     }
@@ -124,21 +150,37 @@ public class JiraClient {
             }
     }
     
-    func getMyself(completion: @escaping(Bool) -> Void) {
-        let url = "\(baseUrl)/rest/api/\(apiVersion)/myself"
-
-        AF.request(url, method: .get, parameters: nil, headers: authHeaders())
-            .validate(statusCode: 200..<300)
-            .response { response in
-                switch response.result {
-                case .success(_):
-                    completion(true)
-                case .failure(let error):
-                    completion(false)
-                    print(error)
-                    sendNotification(body: error.localizedDescription)
+    func validateCredentials(completion: @escaping (Bool) -> Void) {
+        switch instanceType {
+        case .cloud:
+            // Cloud: /myself is a reliable auth probe
+            let url = "\(baseUrl)/rest/api/\(apiVersion)/myself"
+            AF.request(url, method: .get, parameters: nil, headers: authHeaders())
+                .validate(statusCode: 200..<300)
+                .response { response in
+                    switch response.result {
+                    case .success:  completion(true)
+                    case .failure(let error):
+                        print(error)
+                        completion(false)
+                    }
                 }
-            }
+        case .server:
+            // Server: /myself returns 401 even with valid PAT on many instances.
+            // Use a minimal JQL search instead — requires auth, always available.
+            let url = "\(baseUrl)/rest/api/2/search"
+            let parameters: [String: Any] = ["jql": "issueKey is not empty", "maxResults": 1]
+            AF.request(url, method: .get, parameters: parameters, headers: authHeaders())
+                .validate(statusCode: 200..<300)
+                .response { response in
+                    switch response.result {
+                    case .success:  completion(true)
+                    case .failure(let error):
+                        print(error)
+                        completion(false)
+                    }
+                }
+        }
     }
 }
 

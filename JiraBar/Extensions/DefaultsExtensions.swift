@@ -6,8 +6,18 @@ enum JiraInstanceType: String, Defaults.Serializable {
     case server
 }
 
+enum JiraServerAuthType: String, Defaults.Serializable {
+    /// Basic auth: username + password. For older Jira Server (pre-8.14).
+    case basic
+    /// Bearer token (PAT). For Jira Server 8.14+ and Data Center.
+    case pat
+}
+
 extension Defaults.Keys {
+    /// Jira Cloud email. Kept under the original key name so existing users are unaffected.
     static let jiraUsername = Key<String>("jiraUsername", default: "")
+    /// Username for self-hosted Jira Server / Data Center. Separate key to avoid clobbering the Cloud email.
+    static let jiraServerUsername = Key<String>("jiraServerUsername", default: "")
     
     static let orgName = Key<String>("orgName", default: "")
     /// Base URL for self-hosted Jira Server / Data Center instances.
@@ -20,6 +30,8 @@ extension Defaults.Keys {
     
     /// Defaults to .cloud so existing users are unaffected.
     static let instanceType = Key<JiraInstanceType>("instanceType", default: .cloud)
+    /// Auth method for self-hosted Server. Defaults to .pat (modern default).
+    static let serverAuthType = Key<JiraServerAuthType>("serverAuthType", default: .pat)
 }
 
 extension KeychainKeys {

@@ -57,6 +57,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
 
+        // Migrate server username from the old shared key.
+        // Before the username split, both instance types used "jiraUsername".
+        // Copy it to "jiraServerUsername" if the user is in server mode and hasn't set one yet.
+        if Defaults[.instanceType] == .server,
+           !Defaults[.jiraUsername].isEmpty,
+           Defaults[.jiraServerUsername].isEmpty {
+            Defaults[.jiraServerUsername] = Defaults[.jiraUsername]
+        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.windowClosed), name: NSWindow.willCloseNotification, object: nil)
         guard let statusButton = statusBarItem.button else { return }
         let icon = NSImage(named: "mark-gradient-white-jira")

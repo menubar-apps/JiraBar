@@ -100,8 +100,9 @@ private struct CloudPreferencesView: View {
 // MARK: - Server
 
 private struct ServerPreferencesView: View {
-    @Default(.jiraUsername) var jiraUsername
+    @Default(.jiraServerUsername) var jiraUsername
     @Default(.jiraHost) var jiraHost
+    @Default(.serverAuthType) var serverAuthType
     @Default(.jql) var jql
     @Default(.refreshRate) var refreshRate
     @Default(.maxResults) var maxResults
@@ -116,9 +117,6 @@ private struct ServerPreferencesView: View {
         HStack {
             Spacer()
             Form {
-                TextField("Username:", text: $jiraUsername)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
                 LabeledContent("Jira URL:") {
                     DebounceTextField(label: "", value: $jiraHostState) { _ in
                         jiraHostState = jiraHostState.trimmingCharacters(in: .whitespaces)
@@ -131,7 +129,18 @@ private struct ServerPreferencesView: View {
                     }
                 }
 
-                LabeledContent("Password:") {
+                Picker("Auth Type:", selection: $serverAuthType) {
+                    Text("Personal Access Token").tag(JiraServerAuthType.pat)
+                    Text("Username & Password").tag(JiraServerAuthType.basic)
+                }
+                .frame(width: 300)
+
+                if serverAuthType == .basic {
+                    TextField("Username:", text: $jiraUsername)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+
+                LabeledContent(serverAuthType == .pat ? "Token:" : "Password:") {
                     HStack {
                         SecureField("", text: $jiraToken)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -145,8 +154,13 @@ private struct ServerPreferencesView: View {
                     }
                 }
 
-                Text("Use your Jira username and password. Enter the full base URL, e.g. `https://jira.mycompany.com`.")
-                    .font(.footnote)
+                if serverAuthType == .pat {
+                    Text("Generate a Personal Access Token in your Jira profile settings. Available on Jira Server 8.14+ and Data Center.")
+                        .font(.footnote)
+                } else {
+                    Text("Basic authentication using your Jira username and password. For older Jira Server instances.")
+                        .font(.footnote)
+                }
 
                 Divider()
 
