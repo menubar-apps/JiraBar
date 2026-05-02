@@ -3,14 +3,25 @@ import SwiftUI
 import Foundation
 import Defaults
 
+
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @Default(.refreshRate) var refreshRate
     @Default(.jql) var jql
     @Default(.orgName) var orgName
+    @Default(.instanceType) var instanceType
+    @Default(.jiraHost) var jiraHost
 
     let jiraClient = JiraClient()
+
+    /// Base web URL for opening pages in the browser — mirrors JiraClient.baseUrl.
+    private var baseUrl: String {
+        switch instanceType {
+        case .cloud:  return "https://\(orgName).atlassian.net"
+        case .server: return jiraHost.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        }
+    }
     
     var statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let menu: NSMenu = NSMenu()
@@ -23,7 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var unknownPersonAvatar: NSImage!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.windowClosed), name: NSWindow.willCloseNotification, object: nil)
         guard let statusButton = statusBarItem.button else { return }
         let icon = NSImage(named: "mark-gradient-white-jira")
@@ -96,7 +106,7 @@ extension AppDelegate {
                         if issue.fields.summary.count > 50 {
                             issueItem.toolTip = issue.fields.summary
                         }
-                        issueItem.representedObject = URL(string: "https://\(self.orgName).atlassian.net/browse/\(issue.key)")
+                        issueItem.representedObject = URL(string: "\(self.baseUrl)/browse/\(issue.key)")
                         
                         self.jiraClient.getTransitionsByIssueKey(issueKey: issue.key) { transitions in
                             if !transitions.isEmpty {
@@ -154,12 +164,12 @@ extension AppDelegate {
     @objc
     func openSearchResults() {
         let encodedPath = jql.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
-        NSWorkspace.shared.open(URL(string: "https://\(orgName).atlassian.net/issues?jql=" + encodedPath!)!)
+        NSWorkspace.shared.open(URL(string: "\(baseUrl)/issues?jql=" + encodedPath!)!)
     }
     
     @objc
     func openCreateNewIssue() {
-        NSWorkspace.shared.open(URL(string: "https://\(orgName).atlassian.net/secure/CreateIssue!default.jspa")!)
+        NSWorkspace.shared.open(URL(string: "\(baseUrl)/secure/CreateIssue!default.jspa")!)
     }
     
     @objc
@@ -264,4 +274,3 @@ extension AppDelegate {
         }
     }
 }
-
