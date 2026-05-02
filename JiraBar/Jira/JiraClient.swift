@@ -166,11 +166,10 @@ public class JiraClient {
                     }
                 }
         case .server:
-            // Server: /myself returns 401 even with valid PAT on many instances.
-            // Use a minimal JQL search instead — requires auth, always available.
-            let url = "\(baseUrl)/rest/api/2/search"
-            let parameters: [String: Any] = ["jql": "issueKey is not empty", "maxResults": 1]
-            AF.request(url, method: .get, parameters: parameters, headers: authHeaders())
+            // /myself reliably requires auth on Server (returns 401 with invalid/missing token).
+            // We only check the status code so XML vs JSON response body doesn't matter.
+            let url = "\(baseUrl)/rest/api/2/myself"
+            AF.request(url, method: .get, parameters: nil, headers: authHeaders())
                 .validate(statusCode: 200..<300)
                 .response { response in
                     switch response.result {
