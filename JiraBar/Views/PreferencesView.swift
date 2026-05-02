@@ -134,6 +134,9 @@ private struct ServerPreferencesView: View {
                     Text("Username & Password").tag(JiraServerAuthType.basic)
                 }
                 .frame(width: 300)
+                .onChange(of: serverAuthType) { _ in
+                    jiraTokenValidator.setLoading()
+                }
 
                 if serverAuthType == .basic {
                     TextField("Username:", text: $jiraUsername)
