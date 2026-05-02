@@ -2,7 +2,6 @@ import Cocoa
 import SwiftUI
 import Foundation
 import Defaults
-import KeychainAccess
 
 
 @main
@@ -35,37 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var unknownPersonAvatar: NSImage!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
-        // Migrate stale jiraHost default from previous app versions.
-        // The old default was "https://issues.apache.org/jira"; reset it to the
-        // current placeholder so the Server preferences field doesn't fire DNS
-        // requests against a URL the user never intentionally configured.
-        if Defaults[.jiraHost] == "https://issues.apache.org/jira" {
-            Defaults[.jiraHost] = "https://jira.example.com"
-        }
-
-        // Migrate server token from the old shared keychain key.
-        // Before the cloud/server token split, both instance types stored credentials
-        // under "jiraToken". If the user is in server mode and "jiraServerToken" is
-        // still empty, copy whatever is in "jiraToken" across so they don't need to
-        // re-enter their password.
-        if Defaults[.instanceType] == .server,
-           let existing = try? Keychain().get("jiraToken"), !existing.isEmpty {
-            let serverToken: String? = (try? Keychain().get("jiraServerToken")) ?? nil
-            if serverToken == nil || serverToken!.isEmpty {
-                try? Keychain().set(existing, key: "jiraServerToken")
-            }
-        }
-
-        // Migrate server username from the old shared key.
-        // Before the username split, both instance types used "jiraUsername".
-        // Copy it to "jiraServerUsername" if the user is in server mode and hasn't set one yet.
-        if Defaults[.instanceType] == .server,
-           !Defaults[.jiraUsername].isEmpty,
-           Defaults[.jiraServerUsername].isEmpty {
-            Defaults[.jiraServerUsername] = Defaults[.jiraUsername]
-        }
-
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.windowClosed), name: NSWindow.willCloseNotification, object: nil)
         guard let statusButton = statusBarItem.button else { return }
         let icon = NSImage(named: "mark-gradient-white-jira")
@@ -306,4 +274,3 @@ extension AppDelegate {
         }
     }
 }
-

@@ -166,15 +166,24 @@ public class JiraClient {
                     }
                 }
         case .server:
-            // /myself returns 401 even with valid PATs on many Server instances.
-            // Use reporter=currentUser() search instead — requires a recognised user session.
+            // /myself returns 401 on some Server instances even with valid PATs.
+            // Validate via a lightweight search and require a non-anonymous user context.
             let url = "\(baseUrl)/rest/api/2/search"
             let parameters: [String: Any] = ["jql": "reporter = currentUser()", "maxResults": 1]
             AF.request(url, method: .get, parameters: parameters, headers: authHeaders())
                 .validate(statusCode: 200..<300)
-                .response { response in
+                .responseData { response in
                     switch response.result {
-                    case .success:  completion(true)
+                    case .success:
+                        let usernameHeader = response.response?
+                            .value(forHTTPHeaderField: "X-AUSERNAME")?
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                            .lowercased()
+                        if let usernameHeader, !usernameHeader.isEmpty {
+                            completion(usernameHeader != "anonymous")
+                        } else {
+                            completion(true)
+                        }
                     case .failure(let error):
                         print(error)
                         completion(false)
