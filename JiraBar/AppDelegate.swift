@@ -87,10 +87,13 @@ extension AppDelegate {
                     self.menu.addItem(.separator())
                     self.menu.addItem(withTitle: status, action: nil, keyEquivalent: "")
                     
-                    for issue in issuess {
+                    let sortedIssues = issuess.sorted { priorityWeight(for: $0.fields.priority.name) > priorityWeight(for: $1.fields.priority.name) }
+                    
+                    for issue in sortedIssues {
                         let issueItem = NSMenuItem(title: "", action: #selector(self.openLink), keyEquivalent: "")
                         
                         let issueItemTitle = NSMutableAttributedString(string: "")
+                            .appendIcon(iconName: priorityIcon(for: issue.fields.priority.name), color: priorityColor(for: issue.fields.priority.name))
                             .appendString(string: issue.fields.summary.trunc(length: 50))
                             .appendNewLine()
                             .appendIcon(iconName: "hash", color: NSColor.gray)
@@ -272,5 +275,56 @@ extension AppDelegate {
                 }
             }
         }
+    }
+}
+
+func priorityIcon(for priority: String) -> String {
+    switch priority.lowercased() {
+    case "highest":
+        return "chevron.up.2"
+    case "high":
+        return "chevron.up"
+    case "medium":
+        return "minus"
+    case "low":
+        return "chevron.down"
+    case "lowest":
+        return "chevron.down.2"
+    default:
+        return "minus"
+    }
+}
+
+func priorityColor(for priority: String) -> NSColor {
+    switch priority.lowercased() {
+    case "highest":
+        return NSColor.systemRed
+    case "high":
+        return NSColor.systemOrange
+    case "medium":
+        return NSColor.systemYellow
+    case "low":
+        return NSColor.systemGreen
+    case "lowest":
+        return NSColor.systemBlue
+    default:
+        return NSColor.gray
+    }
+}
+
+func priorityWeight(for priority: String) -> Int {
+    switch priority.lowercased() {
+    case "highest":
+        return 5
+    case "high":
+        return 4
+    case "medium":
+        return 3
+    case "low":
+        return 2
+    case "lowest":
+        return 1
+    default:
+        return 0
     }
 }
