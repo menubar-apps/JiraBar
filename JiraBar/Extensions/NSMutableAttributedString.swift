@@ -1,5 +1,5 @@
 import Foundation
-import SwiftUI		
+import AppKit
 
 extension NSMutableAttributedString {
 
@@ -21,7 +21,12 @@ extension NSMutableAttributedString {
     
     @discardableResult
     func appendIcon(iconName: String, color: NSColor = NSColor.gray) -> NSMutableAttributedString {
-        let image = NSImage(named: iconName)?.tint(color: color)
+        var image: NSImage? = NSImage(named: iconName)
+        if image == nil {
+            let config = NSImage.SymbolConfiguration(pointSize: 12, weight: .regular)
+            image = NSImage(systemSymbolName: iconName, accessibilityDescription: nil)?.withSymbolConfiguration(config)
+        }
+        image = image?.tint(color: color)
         image?.size = NSSize(width: 12, height: 12)
         let image1Attachment = NSTextAttachment()
         image1Attachment.attachmentCell = NSTextAttachmentCell(imageCell: image)

@@ -24,6 +24,7 @@ struct Fields: Codable {
     var issuetype: IssueType
     var project: Project
     var assignee: User?
+    var priority: Priority
     
     enum CodingKeys: String, CodingKey {
         case summary
@@ -31,6 +32,7 @@ struct Fields: Codable {
         case issuetype
         case project
         case assignee
+        case priority
     }
 }
 
@@ -49,6 +51,16 @@ struct IssueType: Codable {
     
     enum CodingKeys: String, CodingKey {
         case name
+    }
+}
+
+struct Priority: Codable {
+    var name: String
+    var iconUrl: URL?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case iconUrl
     }
 }
 

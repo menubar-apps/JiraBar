@@ -89,7 +89,7 @@ public class JiraClient {
         let url = "\(baseUrl)/rest/api/\(apiVersion)/\(searchPath)"
         let parameters: [String: Any] = [
             "jql": jql,
-            "fields": "id,assignee,summary,status,issuetype,project",
+            "fields": "id,assignee,summary,status,issuetype,project,priority",
             "maxResults": maxResults
         ]
 
